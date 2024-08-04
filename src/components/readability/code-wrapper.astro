@@ -1,0 +1,19 @@
+---
+import { Code } from 'astro:components';
+
+interface Props {
+  code: string;
+  id: string;
+}
+const { code, id } = Astro.props;
+---
+
+<Code
+  lang={'text'}
+  class={'hidden'}
+  theme={'github-light'}
+  wrap={true}
+  id={id}
+  code={code}
+  defaultColor={false}
+/>

@@ -1,0 +1,98 @@
+/* color variables */
+:root {
+  --body-bg: #fbfbfb;
+  --text-color: #403f53;
+  --link-color: #0077cc;
+  --link-hover-color: #004466;
+  --link-visited-color: #440099;
+  --link-visited-hover-color: #220066;
+  --border-color: #282828;
+  --code-bg: #f6f6f6;
+  --code-color: #403f53;
+  --code-border-color: #282828;
+}
+
+.font-family {
+  font-family: Charter, 'Bitstream Charter', 'Sitka Text', Cambria, serif;
+  font-weight: normal;
+}
+.monospace {
+  font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas,
+    'DejaVu Sans Mono', monospace;
+  font-weight: normal;
+  font-size: 0.89rem;
+}
+
+.text-size {
+  font-size: 18px;
+  letter-spacing: 0.01rem;
+}
+
+.line-length {
+  max-width: 65ch;
+}
+
+.margin {
+  margin: 0 auto;
+}
+
+.padding {
+  padding: 0.5rem;
+}
+
+.padding-pre {
+  padding: 0 1rem;
+}
+
+.line-height {
+  line-height: 1.5;
+}
+
+.pre {
+  white-space: pre-wrap;
+}
+
+.hidden {
+  display: none;
+}
+
+.colors {
+  color: var(--text-color);
+  background-color: var(--body-bg);
+}
+
+.colors-pre {
+  color: var(--code-color);
+  background: linear-gradient(to left, var(--code-bg), var(--body-bg));
+  border-left: 1px dashed var(--code-border-color);
+}
+.hr {
+  border: 0;
+  border-top: 1px dashed var(--border-color);
+  margin: 1rem 0;
+}
+
+@keyframes heartbeat {
+  0%,
+  100% {
+    color: black;
+    transform: scale(1);
+  }
+  25% {
+    color: #444; /* Dark grey */
+    transform: scale(1.15);
+  }
+  50% {
+    color: #222; /* Darker grey */
+    transform: scale(1.1);
+  }
+  75% {
+    color: #444; /* Dark grey */
+    transform: scale(1.15);
+  }
+}
+
+.heartbeat {
+  display: inline-block;
+  animation: heartbeat 1.5s infinite;
+}
