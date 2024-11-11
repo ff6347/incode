@@ -1,3 +1,15 @@
+# [1.2.0](https://github.com/ff6347/incode/compare/v1.1.0...v1.2.0) (2024-11-11)
+
+
+### Bug Fixes
+
+* Use blank layout ([d675524](https://github.com/ff6347/incode/commit/d675524e58d36a0c06d32aeb107ad1fb1173a6c8))
+
+
+### Features
+
+* Use nested layouts for meta tags ([87a02ed](https://github.com/ff6347/incode/commit/87a02ed6a2a236c275d5a86c043ef3e452e3834c))
+
 # [1.1.0](https://github.com/ff6347/incode/compare/v1.0.0...v1.1.0) (2024-11-11)
 
 
