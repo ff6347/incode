@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+
+  <div class="baseline-container">
+    <span class="baseline-text small">Small text</span>
+    <span class="baseline-text medium">Medium text</span>
+    <span class="baseline-text large">Large text</span>
+  </div>
+
+
+<style>
+  .baseline-container {
+    display: flex;
+    align-items: baseline;
+  }
+
+  .baseline-text {
+    display: inline-block;
+    line-height: 1;
+    padding: 0;
+    margin: 0;
+  }
+
+  .small {
+    font-size: 12px;
+  }
+
+  .medium {
+    font-size: 18px;
+  }
+
+  .large {
+    font-size: 24px;
+  }
+
+</style>
+	<h1>Heading 1</h1>
+	<h2>Heading 2</h2>
+	<h3>Heading 3</h3>
+	<h4>Heading 4</h4>
+	<p>
+		Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+		eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+		minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+		aliquip ex ea commodo consequat. Duis aute irure dolor in
+		reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+		pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+		culpa qui officia deserunt mollit anim id est laborum.
+	</p>
+	<h5>Heading 5</h5>
+	<h6>Heading 6</h6>
+	<script>
+ function getComputedFontSizes(elem) {
+  const headersAndP = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
+  const result = {};
+
+  headersAndP.forEach((tag) => {
+    const element = elem.querySelector(tag);
+    if (element) {
+      const fontSize = window.getComputedStyle(element).fontSize;
+      result[tag] = fontSize;
+    } else {
+      console.warn(`${tag} element not found.`);
+    }
+  });
+
+  const basePixelSize = parseFloat(
+    getComputedStyle(document.documentElement).fontSize,
+  );
+  // Convert pixel sizes to rem
+  Object.keys(result).forEach((tag) => {
+    const pixelSize = parseFloat(result[tag]);
+    const remSize = pixelSize / basePixelSize;
+
+    result[tag] = remSize + 'rem';
+  });
+  result['baseFontSize'] = basePixelSize + 'px';
+
+  return result;
+}
+
+const computedFontSizes = getComputedFontSizes(document.body);
+console.log(computedFontSizes);
+
+	</script>
+</body>
+</html>
