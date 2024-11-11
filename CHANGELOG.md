@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/ff6347/incode/compare/v1.0.0...v1.1.0) (2024-11-11)
+
+
+### Features
+
+* article about flexbox ([#5](https://github.com/ff6347/incode/issues/5)) ([8f47926](https://github.com/ff6347/incode/commit/8f47926b391d2705675d98e135b5c49992c74ee5))
+
 # 1.0.0 (2024-11-11)
 
 
