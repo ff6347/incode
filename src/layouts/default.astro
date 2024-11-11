@@ -1,48 +1,48 @@
 ---
+import '../css/reset.css';
+import '../css/base.css';
+
+import '../css/global.css';
 interface Props {
-  description?: string;
-  keywords?: string;
-  author?: string;
-  useGlobalCss?: boolean;
+	title?: string;
+	description?: string;
+	keywords?: string;
+	author?: string;
+	useGlobalCss?: boolean;
 }
 const {
-  description = 'incode.cc about things done in ... duh',
-  keywords = 'design, code, programming',
-  author = "Fabian 'ff6347' Morón Zirfas",
-  useGlobalCss = false,
+	title = 'incode.cc',
+	description = 'incode.cc about things done in ... duh',
+	keywords = 'design, code, programming',
+	author = "Fabian 'ff6347' Morón Zirfas",
+	useGlobalCss = false,
 } = Astro.props;
 ---
 
-<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Readability :: incode.cc</title>
-    <meta name="description" content={description} />
-    <meta name="author" content={author} />
-    <meta name="keywords" content={keywords} />
-    <meta name="robots" content="index, follow" />
-    <meta name="revisit-after" content="7 days" />
-    <link rel="shortcut icon" href="favicon.svg" type="image/svg+xml" />
-    <!-- Open Graph meta tags -->
-    <meta property="og:title" content="Readability :: incode.cc" />
-    <meta
-      property="og:description"
-      content="A visual interactive guide to readability on the web"
-    />
-    <meta
-      property="og:image"
-      content="https://incode.cc/assets/images/og.png"
-    />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:url" content="https://incode.cc/" />
-    <meta property="og:type" content="website" />
-
-    {useGlobalCss && <link rel="stylesheet" href="/assets/css/global.css" />}
-  </head>
-  <body>
-    <slot />
-  </body>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<meta name="author" content={author} />
+		<meta name="keywords" content={keywords} />
+		<meta name="robots" content="index, follow" />
+		<meta name="revisit-after" content="7 days" />
+		<link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml" />
+		<!-- Open Graph meta tags -->
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta
+			property="og:image"
+			content="https://incode.cc/assets/images/og.png"
+		/>
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+		<meta property="og:url" content="https://incode.cc/" />
+		<meta property="og:type" content="website" />
+	</head>
+	<body>
+		<slot />
+	</body>
 </html>
