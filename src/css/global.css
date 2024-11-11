@@ -1,0 +1,137 @@
+:root {
+	--body-bg: #fbfbfb;
+	--text-color: #403f53;
+	--link-color: #0077cc;
+	--link-hover-color: #004466;
+	--link-visited-color: #440099;
+	--link-visited-hover-color: #220066;
+	--border-color: #282828;
+	--code-bg: lightgoldenrodyellow;
+	--code-color: #403f53;
+	--code-border-color: lightgoldenrodyellow;
+	--max-chars: 60ch;
+}
+* {
+	padding: 0;
+	box-sizing: border-box;
+}
+
+/* * {
+	outline: 1px solid red;
+	overflow: visible !important;
+} */
+
+html,
+body {
+	height: 100%;
+}
+body {
+	margin: 0 auto;
+}
+
+main {
+	max-width: 66ch;
+	margin: 0 auto;
+	width: 100%;
+	padding: 0 8px;
+}
+
+p {
+	max-width: 60ch;
+	margin-bottom: 32px;
+}
+
+li {
+	margin-bottom: 8px;
+	margin-left: 16px;
+}
+
+.example {
+	margin-bottom: 32px;
+	margin-top: 32px;
+}
+
+pre {
+	white-space: pre-wrap;
+}
+
+code {
+	tab-size: 2;
+}
+
+/* Make sure pre and code blocks don't overflow */
+pre,
+code {
+	max-width: 100%;
+	overflow-x: auto;
+}
+
+pre {
+	padding: 16px;
+	border-left: 8px solid var(--code-border-color);
+	margin-bottom: 32px;
+}
+
+code {
+	background-color: var(--code-bg);
+	border-radius: 4px;
+}
+
+pre code {
+	background-color: transparent;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	margin-bottom: 1em;
+	margin-top: 1.2em;
+}
+
+/** Typography */
+html {
+	font-family: Avenir, Montserrat, Corbel, 'URW Gothic', source-sans-pro,
+		sans-serif;
+	font-weight: normal;
+	line-height: 1.5;
+}
+code {
+	font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas,
+		'DejaVu Sans Mono', monospace;
+	font-weight: normal;
+	font-size: 0.89rem;
+}
+html {
+	font-size: 110%;
+}
+/** 1.125 — Major second */
+h1 {
+	font-size: 1.424rem;
+}
+h2 {
+	font-size: 1.266rem;
+}
+h3 {
+	font-size: 1.125rem;
+}
+h4 {
+	font-size: 1rem;
+}
+h5 {
+	font-size: 0.889rem;
+}
+h6 {
+	font-size: 0.79rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-weight: 600;
+}

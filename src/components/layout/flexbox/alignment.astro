@@ -1,0 +1,318 @@
+---
+interface Props {
+	className:
+		| 'justify-content-start'
+		| 'justify-content-end'
+		| 'justify-content-center'
+		| 'justify-content-space-between'
+		| 'justify-content-space-around';
+	title: string;
+	alignItems?:
+		| 'align-items-start'
+		| 'align-items-end'
+		| 'align-items-center'
+		| 'align-items-stretch';
+	alignSelf?:
+		| 'align-self-start'
+		| 'align-self-end'
+		| 'align-self-center'
+		| 'align-self-stretch';
+	itemSelector?: 1 | 2 | 3 | 4 | 5;
+}
+const { title, className, alignItems, alignSelf, itemSelector }: Props =
+	Astro.props;
+---
+
+<h3>{title}</h3>
+<div
+	class={`flex-container ${className} ${alignItems ? alignItems : 'align-items-default'}`}
+	id="alignment"
+	data-className={className}
+>
+	<div
+		class={`flex-item ${alignSelf ? alignSelf : ''}`}
+		data-item={itemSelector}
+	>
+		1
+	</div>
+	<div
+		class={`flex-item ${alignSelf ? alignSelf : ''}`}
+		data-item={itemSelector}
+	>
+		2
+	</div>
+	<div
+		class={`flex-item ${alignSelf ? alignSelf : ''}`}
+		data-item={itemSelector}
+	>
+		3
+	</div>
+	<div
+		class={`flex-item ${alignSelf ? alignSelf : ''}`}
+		data-item={itemSelector}
+	>
+		4
+	</div>
+	<div
+		class={`flex-item ${alignSelf ? alignSelf : ''}`}
+		data-item={itemSelector}
+	>
+		5
+	</div>
+	<div class="axis-label axis-row"></div>
+</div>
+<!-- <label for="switch-axis">
+	<input
+		type="checkbox"
+		name="switch-axis"
+		id="switch-axis"
+		autocomplete="off"
+	/>
+	Switch Axis
+</label> -->
+
+<script define:vars={{ className }}>
+	const switchAxis = document.getElementById('switch-axis');
+	if (switchAxis) {
+		switchAxis.addEventListener('change', () => {
+			console.log('switchAxis', switchAxis.checked);
+			const flexContainer = document.querySelector(
+				`[data-className="${className}"]`,
+			);
+			console.log('flexContainer', flexContainer);
+			if (flexContainer) {
+				flexContainer.classList.toggle('column');
+				flexContainer.classList.toggle('column-height');
+			}
+		});
+	}
+</script>
+
+<style>
+	.row {
+		flex-direction: row;
+	}
+	.column {
+		flex-direction: column;
+	}
+	.column-height {
+		height: 512px;
+	}
+	.flex-container {
+		display: flex;
+		min-height: 256px;
+		min-width: 256px;
+		gap: 8px;
+		position: relative; /* Position relative to allow absolute positioning of the line */
+		background-color: hsl(240, 20%, 90%);
+		padding: 16px;
+		/* This is to allow the flex container to resize. It is a nice trick but does not create as many value as I thought. */
+		/* resize: both; */
+		/* overflow: auto; */
+	}
+	.flex-item {
+		padding: 24px;
+		margin: 8px 0;
+	}
+	.flex-item:nth-child(1) {
+		background-color: hsl(240, 100%, 90%);
+	}
+	.flex-item:nth-child(2) {
+		background-color: hsl(260, 100%, 90%);
+	}
+	.flex-item:nth-child(3) {
+		background-color: hsl(280, 100%, 90%);
+	}
+	.flex-item:nth-child(4) {
+		background-color: hsl(300, 100%, 90%);
+	}
+	.flex-item:nth-child(5) {
+		background-color: hsl(320, 100%, 90%);
+	}
+	.justify-content-start {
+		justify-content: flex-start;
+	}
+	.justify-content-end {
+		justify-content: flex-end;
+	}
+	.justify-content-center {
+		justify-content: center;
+	}
+	.justify-content-space-between {
+		justify-content: space-between;
+	}
+	.justify-content-space-around {
+		justify-content: space-around;
+	}
+	.justify-content-space-evenly {
+		justify-content: space-evenly;
+	}
+	.align-items-default {
+		align-items: stretch;
+	}
+	.align-items-start {
+		align-items: flex-start;
+	}
+	.align-items-end {
+		align-items: flex-end;
+	}
+	.align-items-center {
+		align-items: center;
+	}
+	.align-items-stretch {
+		align-items: stretch;
+	}
+	.align-items-baseline {
+		align-items: baseline;
+	}
+	.align-items-start,
+	.align-items-end,
+	.align-items-stretch,
+	.align-items-baseline,
+	.align-items-center {
+		.flex-item:nth-child(1) {
+			font-weight: 500;
+			font-size: 1.5rem;
+		}
+		.flex-item:nth-child(2) {
+			font-size: 1.25rem;
+		}
+		.flex-item:nth-child(3) {
+			font-size: 1rem;
+		}
+		.flex-item:nth-child(4) {
+			font-size: 1.25rem;
+		}
+		.flex-item:nth-child(5) {
+			font-size: 1.5rem;
+			font-weight: 500;
+		}
+	}
+
+	.flex-item.align-self-start[data-item='1']:nth-child(1) {
+		align-self: flex-start;
+	}
+	.flex-item.align-self-end[data-item='1']:nth-child(1) {
+		align-self: flex-end;
+	}
+	.flex-item.align-self-center[data-item='1']:nth-child(1) {
+		align-self: center;
+	}
+	.flex-item.align-self-stretch[data-item='1']:nth-child(1) {
+		align-self: stretch;
+	}
+	.flex-item.align-self-baseline[data-item='1']:nth-child(1) {
+		align-self: baseline;
+	}
+	.flex-item.align-self-start[data-item='2']:nth-child(2) {
+		align-self: flex-start;
+	}
+	.flex-item.align-self-end[data-item='2']:nth-child(2) {
+		align-self: flex-end;
+	}
+	.flex-item.align-self-center[data-item='2']:nth-child(2) {
+		align-self: center;
+	}
+	.flex-item.align-self-stretch[data-item='2']:nth-child(2) {
+		align-self: stretch;
+	}
+	.flex-item.align-self-baseline[data-item='2']:nth-child(2) {
+		align-self: baseline;
+	}
+
+	.flex-item.align-self-start[data-item='3']:nth-child(3) {
+		align-self: flex-start;
+	}
+	.flex-item.align-self-end[data-item='3']:nth-child(3) {
+		align-self: flex-end;
+	}
+	.flex-item.align-self-center[data-item='3']:nth-child(3) {
+		align-self: center;
+	}
+	.flex-item.align-self-stretch[data-item='3']:nth-child(3) {
+		align-self: stretch;
+	}
+	.flex-item.align-self-baseline[data-item='3']:nth-child(3) {
+		align-self: baseline;
+	}
+
+	.flex-item.align-self-start[data-item='4']:nth-child(4) {
+		align-self: flex-start;
+	}
+	.flex-item.align-self-end[data-item='4']:nth-child(4) {
+		align-self: flex-end;
+	}
+	.flex-item.align-self-center[data-item='4']:nth-child(4) {
+		align-self: center;
+	}
+	.flex-item.align-self-stretch[data-item='4']:nth-child(4) {
+		align-self: stretch;
+	}
+	.flex-item.align-self-baseline[data-item='4']:nth-child(4) {
+		align-self: baseline;
+	}
+
+	.flex-item.align-self-start[data-item='5']:nth-child(5) {
+		align-self: flex-start;
+	}
+	.flex-item.align-self-end[data-item='5']:nth-child(5) {
+		align-self: flex-end;
+	}
+	.flex-item.align-self-center[data-item='5']:nth-child(5) {
+		align-self: center;
+	}
+	.flex-item.align-self-stretch[data-item='5']:nth-child(5) {
+		align-self: stretch;
+	}
+	.flex-item.align-self-baseline[data-item='5']:nth-child(5) {
+		align-self: baseline;
+	}
+
+	.axis-label {
+		position: absolute;
+	}
+	.axis-label.axis-row {
+		top: -16px;
+		left: 0;
+		right: 0;
+		height: 1px;
+		border-top: 1px dashed black;
+	}
+	.axis-label.axis-column {
+		top: 0;
+		left: -16px;
+		border-left: 1px dashed black;
+	}
+
+	.axis-label.axis-row::after {
+		content: 'Primary Axis';
+		position: absolute;
+		top: 0px;
+		left: 0px;
+		/* transform: translateX(-50%); */
+		background-color: white;
+		padding: 2px 4px;
+		font-size: 12px;
+		box-shadow: 1px 1px 1px 1px darkgrey;
+	}
+	.axis-label.axis-row::before {
+		content: '';
+		position: absolute;
+		left: 100%;
+		top: 0px;
+		transform: translateY(-50%);
+		border: 5px solid transparent;
+		border-left-color: black;
+		/* margin-left: 5px; */
+	}
+
+	.axis-label.axis-column::after {
+		content: 'Cross Axis';
+	}
+	.axis-label.axis-column::before {
+		content: '';
+		position: absolute;
+		left: 100%;
+		top: 0px;
+	}
+</style>

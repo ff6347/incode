@@ -1,0 +1,21 @@
+---
+const { title } = Astro.props;
+---
+
+<style>
+	.flex-container {
+		display: flex;
+		flex-direction: row;
+	}
+	li {
+		margin: 0 10px;
+		list-style: none;
+	}
+</style>
+<nav>
+	<ul class="flex-container">
+		<li><a href="#">home</a></li>
+		<li><a href="#">about</a></li>
+		<li><a href="#">projects</a></li>
+	</ul>
+</nav>
