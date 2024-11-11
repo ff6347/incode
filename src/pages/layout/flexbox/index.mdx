@@ -1,0 +1,175 @@
+---
+# layout: '../../../layouts/default.astro'
+title: 'Flexbox'
+---
+
+import DefaultLayout from '../../../layouts/default.astro';
+
+import './style.css';
+import Nav from '../../../components/layout/flexbox/nav.astro';
+import SvgFlexdirectionRow from '../../../components/layout/flexbox/svg-flexdirection-row.astro';
+import Alignment from '../../../components/layout/flexbox/alignment.astro';
+import Note from '../../../components/note.astro';
+
+<DefaultLayout useGlobalCss={true}>
+	<main>
+		# Flexbox
+
+Is about laying out things on a single axis
+
+- as a row
+- as a column
+
+## Apply Flexbox
+
+Apply `flexbox` to an element and it will change how its children behave. The item itself will still behave like a block level element. Below you see the CSS we apply
+
+```css
+.flex-container {
+	display: flex;
+}
+li {
+	margin: 0 10px;
+}
+```
+
+to this HTML.
+
+```html
+<nav class="flex-container">
+	<ul>
+		<li>home</li>
+		<li>about</li>
+		<li>projects</li>
+	</ul>
+</nav>
+```
+
+The result can be seen below.
+
+<div class="example">
+	<Nav title="Flexbox" />
+</div>
+
+## Flexbox Directions
+
+The `flex-direction` controls on which axis the children will be laid out. By default we lay them out in a `row`. That means from left to right. This sets also the primary axis to go from the left to the right. But we can change this. If we want it to go from top to bottom we can set `flex-direction: column`. From right to left we can set `flex-direction: row-reverse`. From bottom to top we can set `flex-direction: column-reverse`. With each of these changes the primary axis also changes.
+
+### Flex Direction Row
+
+<SvgFlexdirectionRow isFlexDirectionRow={true} />
+
+### Flex Direction Column
+
+<SvgFlexdirectionRow isFlexDirectionRow={false} />
+
+## Flexbox Alignment
+
+### Primary Axis
+
+For each of the axis we have properties to control the alignment. If we want to control the alignment on the primary axis we use the `justify-content` property. This property can take the following values (there are more but these are the most common ones, see [MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/justify-content) for more):
+
+- `flex-start` (default)
+- `flex-end`
+- `center`
+- `space-between`
+- `space-around`
+- `space-evenly`
+
+Below you see how these values affect the alignment of the children.
+
+<Alignment
+	title="justify-content: flex-start"
+	className="justify-content-start"
+/>
+
+<Alignment title="justify-content: flex-end" className="justify-content-end" />
+
+<Alignment title="justify-content: center" className="justify-content-center" />
+
+<Alignment
+	title="justify-content: space-between"
+	className="justify-content-space-between"
+/>
+
+<Alignment
+	title="justify-content: space-around"
+	className="justify-content-space-around"
+/>
+
+<Alignment
+	title="justify-content: space-evenly"
+	className="justify-content-space-evenly"
+/>
+
+### Cross Axis
+
+To control the alignment on the cross axis we use the `align-items` property. This property can take the following values (there are more but these are the most common ones, see [MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/align-items) for more):
+
+- `flex-start`
+- `flex-end`
+- `center`
+- `stretch` (default)
+- `baseline`
+
+<Alignment
+	title="align-items: stretch"
+	className="justify-content-center"
+	alignItems="align-items-stretch"
+/>
+<Alignment
+	title="align-items: flex-start"
+	className="justify-content-center"
+	alignItems="align-items-start"
+/>
+
+<Alignment
+	title="align-items: baseline"
+	className="justify-content-center"
+	alignItems="align-items-baseline"
+/>
+
+<Alignment
+	title="align-items: center"
+	className="justify-content-center"
+	alignItems="align-items-center"
+/>
+<Alignment
+	title="align-items: flex-end"
+	className="justify-content-center"
+	alignItems="align-items-end"
+/>
+
+### Cross Axis Override
+
+What if we want an item on the cross axis not to stretch or align itself to the end? Since we are not the first ones with this idea, flexbox has a property for that. The `align-self`. This overrides the `align-items` property for the individual item.
+The values are the same as for `align-items`. See [MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/align-self) for more information.
+
+<Alignment
+	title="align-self: flex-end"
+	className="justify-content-center"
+	alignItems="align-items-start"
+	alignSelf="align-self-end"
+	itemSelector={1}
+/>
+
+<Note text="We wont write out all combinations here since you can see the effect in the example for the cross-axis alignment." />
+
+## Growing and Shrinking Items
+
+TBD. Until then check out [this codepen on flexbox flex-grow flex-shrink flex-basis](https://codepen.io/ff6347/pen/BaXGovr/953d617ce222778ac7f8fc6dc2e4f49a).
+
+## The `flex` Shorthand
+
+TBD.
+
+## Wrapping Items
+
+TBD.
+
+## Space between items (`gap`)
+
+TBD.
+
+</main>
+</DefaultLayout>

@@ -1,0 +1,221 @@
+/*
+should have the reset before this
+https://assets.qawsed.site/css/reset.css
+*/
+
+:root {
+	/* CSS HSL */
+	--smoky-black: hsla(24, 14%, 7%, 1);
+	--cyclamen: hsla(341, 73%, 62%, 1);
+	--vista-blue: hsla(235, 44%, 50%, 1);
+	--baby-powder: hsl(60, 60%, 99%);
+	--jet: hsla(34, 7%, 19%, 1);
+
+	--background-color: hsl(0, 0%, 98%);
+	--text-color: var(--smoky-black);
+	--text-color-light: hsl(from var(--text-color) h 0 99);
+	--dark-color: var(--jet);
+	--light-color: var(--baby-powder);
+	--highlight-color: var(--cyclamen);
+	--primary-color: var(--cyclamen);
+	--secondary-color: var(--vista-blue);
+	--code-background-color: hsl(60, 90%, 90%);
+
+	--link-color: hsl(from var(--primary-color) h s calc(l * 0.8));
+	--link-hover-color: var(--vista-blue);
+	--link-active-color: hsl(
+		from var(--primary-color) h calc(s * 1.2) calc(l * 0.8)
+	);
+	--link-visited-color: hsl(from var(--link-color) h s calc(l * 0.8));
+
+	/* sizes */
+	--s1: 8px;
+	--s2: 16px;
+	--s3: 32px;
+	--s4: 64px;
+	--s5: 128px;
+	--s6: 256px;
+	--s7: 512px;
+
+	--max-width: 70ch;
+	--s8: 1024px;
+	--s9: 2048px;
+	--s10: 4096px;
+}
+html,
+body {
+	height: 100%;
+}
+html {
+	font-size: 110%;
+}
+body {
+	/* or other fonts https://modernfontstacks.com/ */
+	font-family: Seravek, 'Gill Sans Nova', Ubuntu, Calibri, 'DejaVu Sans',
+		source-sans-pro, sans-serif;
+	font-weight: normal;
+	line-height: 1.5;
+	color: var(--text-color);
+	background-color: var(--background-color);
+	margin: 0;
+	padding: 0;
+	padding-left: var(--s1);
+	padding-right: var(--s1);
+	max-width: var(--max-width);
+	margin-left: auto;
+	margin-right: auto;
+}
+article,
+section,
+p {
+	/* padding-top: var(--s1); */
+	/* padding-bottom: var(--s2); */
+	margin-bottom: var(--s2);
+}
+
+a {
+	color: var(--link-color);
+}
+a:hover {
+	color: var(--link-hover-color);
+}
+a:active {
+	color: var(--link-active-color);
+}
+a:visited {
+	color: var(--link-visited-color);
+}
+
+pre {
+	font-weight: normal;
+	line-height: 1.5;
+	padding: var(--s1);
+	border-left: var(--s1) solid var(--code-background-color);
+	background-color: white;
+	margin-bottom: var(--s2);
+}
+
+pre,
+code {
+	white-space: pre-wrap;
+	word-wrap: break-word;
+	tab-size: 2;
+}
+
+code {
+	font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas,
+		'DejaVu Sans Mono', monospace;
+	font-size: 0.89em;
+	background-color: var(--code-background-color);
+}
+pre > code {
+	background-color: transparent;
+}
+
+/** 1.250 — Major third */
+
+h1 {
+	font-size: 1.953rem;
+}
+h2 {
+	font-size: 1.563rem;
+}
+h3 {
+	font-size: 1.25rem;
+}
+h4 {
+	font-size: 1rem;
+}
+h5 {
+	font-size: 0.8rem;
+	font-weight: 600;
+}
+h6 {
+	font-size: 0.64rem;
+	font-weight: 600;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-weight: 500;
+	padding: 1.33em 0 0.33em 0;
+}
+
+.note {
+	/* background-color: white; */
+	margin-top: var(--s3);
+	margin-bottom: var(--s2);
+	padding: var(--s1);
+	padding-top: var(--s2);
+	border-left: var(--s1) solid var(--highlight-color);
+
+	position: relative;
+}
+
+.note::before {
+	color: var(--light-color);
+
+	position: absolute;
+	content: 'Note';
+	font-weight: 600;
+	background-color: var(--highlight-color);
+	padding: 0 var(--s1);
+	/* 	border-bottom: 4px solid darkviolet; */
+	left: calc(var(--s1) * -1);
+	top: calc(var(--s2) * -1);
+}
+
+ul {
+	list-style-type: square;
+}
+
+li:has(> ul) {
+	/* Remove bullet from li elements that contain a ul */
+	list-style-type: none;
+	padding-top: var(--s1);
+}
+
+ul ul {
+	list-style-type: square;
+}
+
+ul,
+ol {
+	padding-left: var(--s2);
+	line-height: 1.5;
+}
+li:last-child {
+	padding-bottom: var(--s2);
+}
+
+@media (min-width: 768px) {
+	html {
+		font-size: 120%;
+	}
+	/* perfect fourth */
+
+	h1 {
+		font-size: 2.369rem;
+	}
+	h2 {
+		font-size: 1.777rem;
+	}
+	h3 {
+		font-size: 1.333rem;
+	}
+	h4 {
+		font-size: 1rem;
+	}
+	h5 {
+		font-size: 0.75rem;
+		font-weight: 600;
+	}
+	h6 {
+		font-size: 0.563rem;
+		font-weight: 600;
+	}
+}
