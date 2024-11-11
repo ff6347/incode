@@ -1,19 +1,41 @@
 {
-  "name": "site",
-  "type": "module",
-  "version": "0.0.1",
-  "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro check && astro build",
-    "preview": "astro preview",
-    "astro": "astro"
-  },
-  "dependencies": {
-    "@astrojs/check": "^0.9.1",
-    "@astrojs/mdx": "3.1.9",
-    "@observablehq/plot": "0.6.15",
-    "astro": "^4.13.1",
-    "typescript": "^5.5.4"
-  }
+	"name": "site",
+	"type": "module",
+	"version": "0.0.1",
+	"scripts": {
+		"dev": "astro dev",
+		"start": "astro dev",
+		"build": "astro check && astro build",
+		"preview": "astro preview",
+		"astro": "astro"
+	},
+	"dependencies": {
+		"@astrojs/check": "0.9.1",
+		"@astrojs/mdx": "3.1.9",
+		"@observablehq/plot": "0.6.15",
+		"astro": "4.13.1",
+		"typescript": "5.5.4"
+	},
+	"devDependencies": {
+		"@technologiestiftung/semantic-release-config": "1.2.4",
+		"semantic-release": "24.2.0"
+	},
+	"prettier": {
+		"tabWidth": 2,
+		"semi": true,
+		"singleQuote": false,
+		"useTabs": true,
+		"printWidth": 80,
+		"overrides": [
+			{
+				"files": [
+					"*.yml",
+					"*.yaml"
+				],
+				"options": {
+					"useTabs": false
+				}
+			}
+		]
+	}
 }
