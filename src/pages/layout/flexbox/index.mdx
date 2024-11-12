@@ -1,5 +1,4 @@
 ---
-# layout: '../../../layouts/default.astro'
 title: "Flexbox"
 ---
 
@@ -10,8 +9,15 @@ import Nav from "../../../components/layout/flexbox/nav.astro";
 import SvgFlexdirectionRow from "../../../components/layout/flexbox/svg-flexdirection-row.astro";
 import Alignment from "../../../components/layout/flexbox/alignment.astro";
 import Note from "../../../components/note.astro";
+import Shrink from "../../../components/layout/flexbox/shrink.astro";
+import Grow from "../../../components/layout/flexbox/grow.astro";
+import Wrap from "../../../components/layout/flexbox/wrap.astro";
+import Gap from "../../../components/layout/flexbox/gap.astro";
 
-<DefaultLayout useGlobalCss={true}>
+<DefaultLayout>
+	<header>
+		<img src="/assets/images/flexbox.png" alt="Flexbox primary axis and secondary axis with stickes" />
+	</header>
 	<main>
 		# Flexbox
 
@@ -157,7 +163,44 @@ The values are the same as for `align-items`. See [MDN](https://developer.mozill
 
 ## Growing and Shrinking Items
 
-TBD. Until then check out [this codepen on flexbox flex-grow flex-shrink flex-basis](https://codepen.io/ff6347/pen/BaXGovr/953d617ce222778ac7f8fc6dc2e4f49a).
+<h2>flex-grow</h2>
+<p>
+	The property <code>flex-grow</code> can be used to set which fraction of the
+	existing space an element can occupy (as long as there is enough space). From
+	MDN
+</p>
+
+<blockquote>
+	For example, if four 100px flex items are in a 700px container and the flex
+	items have flex-grow factors of 0, 1, 2, and 3, respectively, the total main
+	size of the three items is 400px, meaning there is 300px of positive free
+	space to be distributed. There are a total of 6 grow factors (3 + 2 + 1),
+	therefore each grow factor is equal to 50px ((300px / 6 ). Each flex item is
+	given an amount of positive free space equal to this amount multiplied by its
+	flex-grow value — so 0, 50px, 100px, and 150px respectively. The total flex
+	item sizes are therefore 100px, 150px, 200px, and 250px respectively.
+</blockquote>
+<h3>Example Flex Grow</h3>
+<p>
+	In the example below we set the <code>flex-basis </code> for each item to
+	100px and the <code>flex-grow</code> factor to 3,2,1 and 0.
+</p>
+
+<Grow />
+
+<h2>flex-shrink</h2>
+<p>
+	The property <code>flex-shrink</code> defines in which proportion an element
+	should shrink relative to all other flex items in the container.
+</p>
+
+<h3>Example Flex Shrink</h3>
+<p>
+	In the example below we set the <code>flex-basis </code> for each item to
+	300px and the <code>flex-shrink</code> factor to 4,3,2 and 1.
+</p>
+
+<Shrink />
 
 ## The `flex` Shorthand
 
@@ -165,11 +208,23 @@ TBD.
 
 ## Wrapping Items
 
-TBD.
+If we don't have enough space available flexbox allows us to define a the property `flex-wrap` to tell the items to wrap.
+
+### Flex Wrap Example
+
+In the example below we apply `flex-wrap: wrap;` to the container. Since all the items have a `flex-basis` of `256px` they wrap around.
+
+<Wrap />
 
 ## Space between items (`gap`)
 
-TBD.
+To control the space between items we can use margin, but flexbox comes with its own property `gap`. This property can take any CSS length value.
+
+### Gap Example
+
+In the example below we apply `gap: 16px;` and `justify-content: center;` to the container.
+
+<Gap />
 
 </main>
 </DefaultLayout>

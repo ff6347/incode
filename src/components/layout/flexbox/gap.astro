@@ -1,0 +1,29 @@
+<div class="flex-container">
+	<div class="flex-item">Item 1</div>
+	<div class="flex-item">Item 2</div>
+	<div class="flex-item">Item 3</div>
+</div>
+
+<style>
+	.flex-container {
+		display: flex;
+		gap: 16px;
+		justify-content: center;
+		text-align: center;
+		text-transform: uppercase;
+		background-color: hsl(20, 80%, 90%);
+		padding: 16px;
+	}
+	.flex-item:nth-child(1) {
+		background-color: hsl(200, 80%, 80%);
+		padding: 16px;
+	}
+	.flex-item:nth-child(2) {
+		background-color: hsl(200, 60%, 80%);
+		padding: 16px;
+	}
+	.flex-item:nth-child(3) {
+		background-color: hsl(200, 40%, 80%);
+		padding: 16px;
+	}
+</style>

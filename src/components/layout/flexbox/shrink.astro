@@ -1,0 +1,47 @@
+<div class="flex-container-shrink">
+	<div class="flex-item" id="item-1">factor 4</div>
+	<div class="flex-item" id="item-2">factor 3</div>
+	<div class="flex-item" id="item-3">factor 2</div>
+	<div class="flex-item" id="item-4">factor 1</div>
+</div>
+<style>
+	.flex-container-shrink {
+		display: flex;
+		/* flex-basis: 700px; */
+		background-color: hsl(330, 80%, 80%);
+		text-transform: uppercase;
+	}
+
+	.flex-item {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-basis: 100px;
+		outline: 1px solid black;
+		/* height: 50px; */
+	}
+
+	.flex-container-shrink .flex-item {
+		flex-basis: 300px;
+	}
+
+	.flex-container-shrink #item-1 {
+		background-color: hsl(110, 80%, 80%);
+		flex-shrink: 4;
+	}
+
+	.flex-container-shrink #item-2 {
+		background-color: hsl(90, 80%, 80%);
+		flex-shrink: 3;
+	}
+
+	.flex-container-shrink #item-3 {
+		background-color: hsl(70, 80%, 80%);
+		flex-shrink: 2;
+	}
+
+	.flex-container-shrink #item-4 {
+		background-color: hsl(50, 80%, 80%);
+		/* flex-shrink: 1; */
+	}
+</style>

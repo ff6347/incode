@@ -1,0 +1,40 @@
+<div class="flex-container flex-container-grow">
+	<div class="flex-item" id="item-1">factor 3</div>
+	<div class="flex-item" id="item-2">factor 2</div>
+	<div class="flex-item" id="item-3">factor 1</div>
+	<div class="flex-item" id="item-4">factor 0</div>
+</div>
+<style>
+	.flex-container-grow {
+		display: flex;
+		text-transform: uppercase;
+	}
+	.flex-item {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-basis: 100px;
+		outline: 1px solid black;
+		height: 50px;
+	}
+
+	.flex-container-grow #item-1 {
+		background-color: hsl(210, 80%, 80%);
+		flex-grow: 3;
+	}
+
+	.flex-container-grow #item-2 {
+		background-color: hsl(190, 80%, 80%);
+		flex-grow: 2;
+	}
+
+	.flex-container-grow #item-3 {
+		background-color: hsl(170, 80%, 80%);
+		flex-grow: 1;
+	}
+
+	.flex-container-grow #item-4 {
+		background-color: hsl(130, 80%, 80%);
+		flex-grow: 0;
+	}
+</style>
