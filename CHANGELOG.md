@@ -1,3 +1,15 @@
+# [1.3.0](https://github.com/ff6347/incode/compare/v1.2.0...v1.3.0) (2024-11-12)
+
+
+### Bug Fixes
+
+* flexbox example ([d2e5111](https://github.com/ff6347/incode/commit/d2e51116596e8ed46eb8eff899b2373213ed16e3))
+
+
+### Features
+
+* finish flexbox article ([9cdb0a6](https://github.com/ff6347/incode/commit/9cdb0a6609562a991df9482f73003762c99afedf))
+
 # [1.2.0](https://github.com/ff6347/incode/compare/v1.1.0...v1.2.0) (2024-11-11)
 
 
