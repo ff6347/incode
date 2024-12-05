@@ -10,11 +10,11 @@
 		"astro": "astro"
 	},
 	"dependencies": {
-		"@astrojs/check": "0.9.1",
+		"@astrojs/check": "0.9.4",
 		"@astrojs/mdx": "3.1.9",
-		"@observablehq/plot": "0.6.15",
-		"astro": "4.16.1",
-		"typescript": "5.5.4"
+		"@observablehq/plot": "0.6.16",
+		"astro": "4.16.17",
+		"typescript": "5.7.2"
 	},
 	"devDependencies": {
 		"@technologiestiftung/semantic-release-config": "1.2.4",
