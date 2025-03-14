@@ -1,0 +1,742 @@
+---
+import Layout from "../../layouts/default.astro";
+---
+
+<Layout>
+	<article>
+		<header>
+			<h1>Anatomy of a (p5.js) Sketch</h1>
+			<p>
+				Disclaimer: This is not JavaScript (JS) 101. To get started with JS
+				please read these articles on MDN.
+			</p>
+			<ul>
+				<li>
+					<a
+						href="https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/JavaScript_basics"
+						target="_blank">"JavaScript basics - Learn web development | MDN"</a
+					>
+				</li>
+				<li>
+					<a
+						href="https://developer.mozilla.org/en-US/docs/Web/JavaScript"
+						target="_blank">"JavaScript | MDN"</a
+					>
+				</li>
+				<li>
+					<a
+						href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide"
+						target="_blank">"JavaScript Guide - JavaScript | MDN"</a
+					>
+				</li>
+			</ul>
+			<p>
+				This article is focused on getting you up and running with <a
+					href="https://p5js.org/"
+					target="_blank">p5.js</a
+				>
+			</p>
+		</header>
+		<section>
+			<h2>Sketch Building Blocks</h2>
+			<p>
+				The most common building blocks of a sketch are <code>setup</code>, <code
+					>draw</code
+				> and the global and local scope. Below you see a very basic sketch that
+				actually does nothing. Roll over the different areas to visualize their scope.
+			</p>
+			<pre>
+				<code>
+					<div id="global">
+	const globalVariable = 123;
+			<div id="setup">function setup&lpar;&rpar; &lcub;
+		const scopedSetupVariable = "Only in setup"&semi;
+		<span class="log">console.log(globalVariable);</span><span class="log-result"> // 123</span>
+	&rcub;</div>
+	<div id="draw">function draw&lpar;&rpar;&lcub;
+		<span class="log">console.log(globalVariable);</span><span class="log-result"> // 123</span>
+		<span class="log">console.log(scopedSetupVariable);</span><span class="log-result"> // undefined</span>
+		const scopedDrawVariable = "Only in draw";
+		<div id="block">if&lpar;true&rpar;&lcub;
+		let blockScopedVariable = "Only in block!"
+		<span class="log">console.log(scopedDrawVariable);</span><span class="log-result"> // Only in draw</span>
+		&rcub;</div>
+		<span class="log">console.log(blockScopedVariable);</span><span class="log-result"> // undefined</span>
+	&rcub;</div>
+
+	</div>
+</code>
+</pre>
+		</section>
+		<section>
+			<h3>Scopes (global and local)</h3>
+			<p>
+				In JavaScript (JS) and other programming languages we encounter the idea
+				of <a
+					href="https://developer.mozilla.org/en-US/docs/Glossary/Scope"
+					target="_blank">scopes</a
+				>. That means something like a variable is bound to a specific area of
+				the code. Functions can have their own scope, there are block scopes and
+				there is something called the global scope where everything exists
+				inside. We can even declare our own scopes in JS by wrapping some part
+				of the code into <code>{}</code> curly brackets.
+			</p>
+			<p>
+				Why is this useful? For one thing it allows us to reuse variable names
+				without overwriting other parts of the program. We can define which
+				variables are available to which part of the program. It also enables
+				use to write more conscious code that does not leak into other areas of
+				the program. Code that has less sideeffects. To make sure that we use
+				the scoping features of JS we always should use <code>const</code>
+				and <code>let</code> to define our variables, never <code>var</code>.
+			</p>
+			<p class="note">
+				<code>let</code> is for variables that change over the course of our programm,
+				<code>const</code> is for <em>constant</em> variables. <code>var</code> is
+				the <em>old</em> way to declare variables and should be avoided since they
+				are not scoped. To learn more about the difference take a look at this article:
+				<a
+					href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types#variable_scope"
+					>"Grammar and types - JavaScript - Variable scope | MDN"
+				</a>
+			</p>
+			<p>
+				When you write p5.js sketches you declare the things you want to use
+				throughout your programm in the global scope at the top. When something
+				is only needed in the <code>setup</code>, the <code>draw</code>, another
+				function, or even the block scope of an <code>if</code> or <code
+					>for</code
+				> statement you declare them inside of that scope (the curly brackets <code
+					>{/*this is a scope*/}</code
+				>). To sum this up.
+			</p>
+			<ul>
+				<li>Scopes define where variables are accessible in code</li>
+				<li>
+					Types of scopes:
+					<ul>
+						<li>Global scope</li>
+						<li>Function scope</li>
+						<li>Block scope</li>
+					</ul>
+				</li>
+				<li>
+					Benefits of scoping:
+					<ul>
+						<li>Reuse variable names without conflicts</li>
+						<li>Control variable accessibility</li>
+						<li>Write more conscious code with fewer side effects</li>
+					</ul>
+				</li>
+				<li>
+					Best practices:
+					<ul>
+						<li>Use <code>const</code> for constants</li>
+						<li>Use <code>let</code> for variables that change</li>
+						<li>Avoid <code>var</code> (not scoped properly)</li>
+					</ul>
+				</li>
+				<li>
+					In p5.js:
+					<ul>
+						<li>Declare global variables at the top</li>
+						<li>Use local scopes in functions and blocks as needed</li>
+					</ul>
+				</li>
+			</ul>
+		</section>
+		<section>
+			<h3><code>setup()</code></h3>
+			<p>
+				The <code>setup</code> is the area of your code where you initilze things,
+				like calculating a value you need or setting up 1000 particles for your program.
+				You name it. The setup is executed once you load the page/sketch and the
+				code inside will be executed from top to bottom. Of course you can also ue
+				drawing commands in the setup but you won't be able to make things interactive.
+				As the function name says you <strong>set</strong>
+				things <strong>up</strong>.
+			</p>
+			<p class="note">
+				You should not try to load other resources like images, fonts or data
+				from some file in the <code>setup</code>. p5.js has a specilized
+				function for that. The <code>preload</code>. This function will run
+				before your <code>setup</code> and <code>draw</code> and will also wait until
+				all things are done loading.
+			</p>
+			<ul>
+				<li>
+					<code>setup()</code> function:
+					<ul>
+						<li>Initializes program elements</li>
+						<li>Executes once when page/sketch loads</li>
+						<li>Runs from top to bottom</li>
+						<li>
+							Can include drawing commands, but not for interactive elements
+						</li>
+					</ul>
+				</li>
+				<li>
+					Loading resources:
+					<ul>
+						<li>
+							Avoid loading resources (images, fonts, data) in <code
+								>setup()</code
+							>
+						</li>
+						<li>
+							Use <code>preload()</code> function instead:
+							<ul>
+								<li>
+									Runs before <code>setup()</code> and <code>draw()</code>
+								</li>
+								<li>Waits for all resources to load</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</section>
+		<section>
+			<h3><code>draw()</code></h3>
+			<p>
+				The <code>draw</code> (also as the name says) is there for drawing and making
+				things interactive. It is executed all the time and the code inside will
+				also be evalutated from top to bottom. The speed of the program depends on
+				many things. The resources of your computer and of course the amount of calculations
+				that need to be done. You could see the draw as the main function of your
+				program where all things should flow together.
+			</p>
+			<p class="note">
+				Due to JavaScript's asynchronous nature and the browser's event-based
+				system, drawing and interactivity can also occur in other functions.
+				This is a more advanced topic for later discussion.
+			</p>
+			<ul>
+				<li>
+					<code>draw()</code> function:
+					<ul>
+						<li>Main purpose: drawing and interactivity</li>
+						<li>Executes continuously</li>
+						<li>Code inside runs from top to bottom</li>
+						<li>Can be considered the main function of the program</li>
+					</ul>
+				</li>
+				<li>
+					Program speed factors:
+					<ul>
+						<li>Computer resources</li>
+						<li>Amount of calculations required</li>
+					</ul>
+				</li>
+				<li>
+					Advanced note:
+					<ul>
+						<li>Drawing and interactivity can occur in other functions</li>
+						<li>Due to JavaScript's asynchronous nature</li>
+						<li>Related to browser's event-based system</li>
+					</ul>
+				</li>
+			</ul>
+		</section>
+		<section>
+			<h3>Other Magic Functions</h3>
+			<p>
+				Both of these functions are somehow magically executed. There are also
+				others like these. For example there is the <code>mousePressed</code> function
+				that is executed everytime the mouse is pressed. (duh!). Or the <code
+					>preload</code
+				> function as already mentioned above. To use these you declare them besides
+				your <code>setup</code> and <code>draw</code> in the global scope. (There
+				are even more of these functions but we won't list them all here.)
+			</p>
+			<pre><code>
+	function preload(){
+	/* Used to load things.
+	Will wait until everything is ready loaded*/
+	}
+	function setup(){
+	/* Used to initilize things.
+	Will execute only once.
+	*/
+	}
+	function draw(){
+	/* Used to draw things.
+	Will execute all the time.
+	*/
+	}
+	function mousePressed(){
+	/* Event based function.
+	Will execute whenever the mouse is pressed.
+	*/
+	}
+	</code></pre>
+
+			<p>
+				Besides these <em>"magic"</em> functions that are declared in global scope
+				and executed automagically there are other functions we use to manipulate
+				or generate things. For example there is the <code>random</code> functio
+				which generates random numbers for us. Or the <code>createCanvas</code> function,
+				that allows us to manipulate the size of the canvas where we draw onto. The
+				<code>point</code>, <code>rect</code>, <code>circle</code>, <code
+					>line</code
+				> functions to draw primitive shapes. And so on. There are many specialized
+				functions that we will have to discuss and learn. The most important thing
+				is. The names of these function are some kind of reserved by p5.js. They
+				wont throw an error in the browser console when we try to use them in a different
+				way (not like <a
+					href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Lexical_grammar#reserved_words"
+					target="_blank">reserved words for JS</a
+				>). At least p5.js will give you a friendly error when you do that.
+			</p>
+			<ul>
+				<li>
+					Some <em>"Magic"</em> Functions in p5.js:
+					<ul>
+						<li>
+							<code>preload()</code>: Loads resources, waits until everything is
+							loaded
+						</li>
+						<li><code>setup()</code>: Initializes things, executes once</li>
+						<li>
+							<code>draw()</code>: Used for drawing, executes continuously
+						</li>
+						<li>
+							<code>mousePressed()</code>: Event-based, executes on mouse press
+						</li>
+						<li>Declared in global scope and executed automatically</li>
+					</ul>
+				</li>
+				<li>
+					Some Other p5.js Functions:
+					<ul>
+						<li><code>random()</code>: Generates random numbers</li>
+						<li><code>createCanvas()</code>: Sets canvas size</li>
+						<li>
+							<code>point()</code>, <code>rect()</code>, <code>circle()</code>, <code
+								>line()</code
+							>: Draw primitive shapes
+						</li>
+						<li>Many specialized functions available</li>
+					</ul>
+				</li>
+				<li>
+					Important Note:
+					<ul>
+						<li>Function names are reserved by p5.js</li>
+						<li>Using them differently may not throw browser console errors</li>
+						<li>p5.js provides friendly errors for misuse</li>
+					</ul>
+				</li>
+			</ul>
+		</section>
+
+		<section>
+			<h2>Sketch</h2>
+			<div id="sketch"></div>
+			<p>
+				In the above sketch we make use of many concepts we discussed above. We
+				declare the global mutable variables <code>x</code> and <code>y</code> both
+				with the value <code>50</code> in the global scope so they are both available
+				in <code>setup</code> and <code>draw</code>.
+			</p>
+			<p>
+				Within the <code>setup</code> we use <code>createCanvas</code> function to
+				create drawing area with a size of <code>100</code> pixel width and
+				<code>100</code> pixel height and assign it to the immutable <code
+					>const</code
+				> variable
+				<code>canvas</code>. Then we call a function of the canvas object <code
+					>canvas.parent()</code
+				> to put it into the right element in the DOM. The element with the attribute
+				<code>id</code> set to <code>sketch</code>. Then we set 3 things for the
+				drawing context of p5.js. The <code>background</code> for the canvas. The
+				<code>stroke</code> color and the <code>fill</code> color. The <code
+					>stroke</code
+				> and <code>fill</code> affect all elements we create after these command
+				is called until we reset them again. The context of p5.js keeps track of
+				these information which colors to use. These values will be valid also in
+				the <code>draw</code> function.
+			</p>
+			<p>
+				In the <code>draw</code> we declare two immutable locallly scoped variables
+				called <code>previousX</code> and <code>previousY</code> and store the current
+				value <code>x</code> and <code>y</code> before we reassign them with a <code
+					>random</code
+				> value in the range between <code>10</code> and
+				<code>90</code>. This allows us to draw a <code>line</code> from the previous
+				x/y value to the newly calculated one. After the line we draw a <code
+					>circle</code
+				> at x/y with a radius of <code>10</code> pixels.
+			</p>
+			<ul>
+				<li>
+					Global scope:
+					<ul>
+						<li>
+							Mutable variables <code>x</code> and <code>y</code> declared with value
+							50
+						</li>
+					</ul>
+				</li>
+				<li>
+					<code>setup()</code> function:
+					<ul>
+						<li>
+							Creates canvas (100x100 pixels) using <code>createCanvas()</code>
+						</li>
+						<li>Assigns canvas to DOM element with id "sketch"</li>
+						<li>
+							Sets drawing context:
+							<ul>
+								<li>Background color</li>
+								<li>Stroke color</li>
+								<li>Fill color</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<code>draw()</code> function:
+					<ul>
+						<li>
+							Declares local variables <code>previousX</code> and <code
+								>previousY</code
+							>
+						</li>
+						<li>
+							Updates <code>x</code> and <code>y</code> with random values (10-90)
+						</li>
+						<li>Draws a line from previous to new position</li>
+						<li>Draws a circle at new position (radius 10 pixels)</li>
+					</ul>
+				</li>
+				<li>
+					Context management:
+					<ul>
+						<li>
+							Stroke and fill colors set in <code>setup()</code> persist in <code
+								>draw()</code
+							>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</section>
+		<section>
+			<h2>Tasks</h2>
+			<ul>
+				<li>
+					Clone this sketch with the button below (save it to your account)
+				</li>
+				<li>
+					Try to create global mutable (<code>let</code>) variables to change
+					colors
+				</li>
+				<li>
+					Remember you can find named colors that you can use <a
+						href="https://colornames.inpyjamas.dev/"
+						target="_blank">here</a
+					>
+				</li>
+				<li>
+					Create locally scoped variables to hold things like the radius and
+					alter them using <code>random</code>
+				</li>
+			</ul>
+			<button id="create-codepen">clone this sketch</button>
+			<style>
+				button#create-codepen {
+					border-radius: 0px;
+					border: 2px solid var(--highlight-color);
+					background-color: var(--light-color);
+					color: var(--text-color);
+					text-transform: uppercase;
+				}
+
+				button#create-codepen:hover {
+					border-radius: 0px;
+					text-decoration: underline;
+					background-color: var(--dark-color);
+					color: var(--text-color-light);
+					transition: all 0.2s ease;
+				}
+
+				button#create-codepen:active {
+					border-radius: 0px;
+					border: 2px solid var(--highlight-color);
+					background-color: var(--dark-color);
+					color: var(--text-color-light);
+				}
+			</style>
+			<script is:inline>
+				const code = `
+	let x = 50;
+	let y = 50;
+	function setup() {
+		const canvas = createCanvas(100, 100);
+		canvas.parent("sketch");
+
+		background("lightgoldenrodyellow");
+		stroke("lightgoldenrodyellow");
+		fill("crimson");
+	}
+	function draw() {
+		const previousX = x;
+		const previousY = y;
+		x = random(10, 90);
+		y = random(10, 90);
+		line(previousX, previousY, x, y);
+		circle(x, y, 10);
+	}
+			`;
+				document
+					.getElementById("create-codepen")
+					.addEventListener("click", () => {
+						const data = {
+							title: "The x/y coordinate system",
+							description:
+								"Part of the seminar fundamentals of digital communication at University of Arts Braunschweig in 2024/25",
+							private: true,
+							tags: ["digicom-2425"],
+							editors: "111",
+							layout: "left",
+							html: '<div id="sketch"></div>',
+							css: "body{display:flex;height:100svh;flex-direction:column;justify-content:center;align-items:center;}",
+							js: code,
+							css_external: [
+								"https://assets.qawsed.site/css/reset.css",
+								"https://assets.qawsed.site/css/base.css",
+							],
+							js_external: [
+								"https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.10.0/p5.min.js",
+							],
+						};
+						const form = document.createElement("form");
+						form.method = "POST";
+						form.action = "https://codepen.io/pen/define";
+						form.target = "_blank";
+						form.innerHTML = `<input type="hidden" name="data" value='${JSON.stringify(data)}'>`;
+						document.body.appendChild(form);
+						form.submit();
+						document.body.removeChild(form);
+					});
+			</script>
+		</section>
+		<section>
+			<h2>Referenced Methods</h2>
+			<p></p>
+			<ul>
+				<li>
+					<a href="https://p5js.org/reference/p5/setup/" target="_blank"
+						><code>setup</code></a
+					>
+				</li>
+				<li>
+					<a href="https://p5js.org/reference/p5/draw/" target="_blank"
+						><code>draw</code></a
+					>
+				</li>
+				<li>
+					<a href="https://p5js.org/reference/p5/preload/" target="_blank"
+						><code>preload</code></a
+					>
+				</li>
+				<li>
+					<a href="https://p5js.org/reference/p5/mousePressed/" target="_blank"
+						><code>mousePressed</code></a
+					>
+				</li>
+				<li>
+					<a href="https://p5js.org/reference/p5/point/" target="_blank"
+						><code>point</code></a
+					>
+				</li>
+				<li>
+					<a href="https://p5js.org/reference/p5/rect/" target="_blank"
+						><code>rect</code></a
+					>
+				</li>
+				<li>
+					<a href="https://p5js.org/reference/p5/circle/" target="_blank"
+						><code>circle</code></a
+					>
+				</li>
+				<li>
+					<a href="https://p5js.org/reference/p5/line/" target="_blank"
+						><code>line</code></a
+					>
+				</li>
+				<li>
+					<a href="https://p5js.org/reference/p5/random/" target="_blank"
+						><code>random</code></a
+					>
+				</li>
+				<li>
+					<a href="https://p5js.org/reference/p5/createCanvas/" target="_blank"
+						><code>createCanvas</code></a
+					>
+				</li>
+				<li>
+					<a href="https://p5js.org/reference/#/p5/background" target="_blank"
+						><code>background</code></a
+					>
+				</li>
+				<li>
+					<a href="https://p5js.org/reference/#/p5/stroke" target="_blank"
+						><code>stroke</code></a
+					>
+				</li>
+				<li>
+					<a href="https://p5js.org/reference/#/p5/fill" target="_blank"
+						><code>fill</code></a
+					>
+				</li>
+			</ul>
+		</section>
+	</article>
+
+	<footer>
+		<p>
+			<a
+				href="https://codepen.io/collection/PYkOeE/584c1fc0a98a14ff05e821d24e62e171"
+				>See the other articles from the collection Getting Started With p5.js</a
+			>
+		</p>
+	</footer>
+</Layout>
+
+<script is:inline src="/assets/js/p5.min.js"></script>
+<script is:inline>
+	let x = 50;
+	let y = 50;
+	function setup() {
+		const canvas = createCanvas(100, 100);
+		canvas.parent("sketch");
+
+		background("lightgoldenrodyellow");
+		stroke("lightgoldenrodyellow");
+		fill("crimson");
+	}
+	function draw() {
+		const previousX = x;
+		const previousY = y;
+		x = random(10, 90);
+		y = random(10, 90);
+		line(previousX, previousY, x, y);
+		circle(x, y, 10);
+	}
+</script>
+
+<style>
+	:root {
+		--global-scope-color: lavender;
+		--setup-scope-color: lightskyblue;
+		--draw-scope-color: lightpink;
+		--block-scope-color: palevioletred;
+	}
+	body {
+		/* 	display: flex; */
+		/* 	height: 100svh; */
+		/* 	flex-direction: column; */
+		/* 	justify-content: center; */
+		/* 	align-items: center; */
+	}
+
+	#global,
+	#setup,
+	#draw,
+	#block {
+		position: relative;
+		transition: all 0.2s ease-in-out;
+		padding-left: var(--s1);
+		padding-right: var(--s1);
+	}
+
+	#global::selection,
+	#setup::selection,
+	#draw::selection,
+	#block::selection,
+	span.log::selection,
+	span.log-result::selection {
+		background-color: white;
+	}
+
+	#global {
+		z-index: 1;
+	}
+
+	#setup,
+	#draw {
+		z-index: 2;
+	}
+
+	#block {
+		/* 	z-index: 10; */
+	}
+
+	#global:hover::before,
+	#setup:hover::before,
+	#draw:hover::before,
+	#block:hover::before {
+		position: absolute;
+		padding-left: 4px;
+		padding-right: 4px;
+		right: 0;
+		top: -1em;
+		background-color: white;
+		transition: all 0.2s ease-in-out;
+	}
+
+	#global:hover::before {
+		content: "global scope";
+		border: 4px solid var(--global-scope-color);
+	}
+	#setup:hover::before {
+		content: "function scope";
+		border: 4px solid var(--setup-scope-color);
+	}
+	#draw:hover::before {
+		content: "function scope";
+		border: 4px solid var(--draw-scope-color);
+	}
+	#block:hover::before {
+		content: "block scope";
+		border: 4px solid var(--block-scope-color);
+	}
+
+	#global:hover {
+		background-color: var(--global-scope-color);
+	}
+
+	#setup:hover {
+		background-color: var(--setup-scope-color);
+	}
+
+	#draw:hover {
+		background-color: var(--draw-scope-color);
+	}
+	#block:hover {
+		background-color: var(--block-scope-color) !important;
+	}
+
+	/* Hide log-result by default */
+	.log-result {
+		display: none;
+	}
+
+	/* Show log-result when hovering over adjacent log */
+	.log:hover + .log-result {
+		display: inline;
+
+		/* 	background-color: white; */
+		/* 	padding-left: 4px; */
+		/* 	padding-right: 4px;  */
+	}
+
+	#sketch {
+		margin-bottom: var(--s2);
+	}
+
+	footer {
+	}
+</style>
