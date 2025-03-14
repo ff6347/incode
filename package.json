@@ -14,10 +14,12 @@
 		"@astrojs/mdx": "3.1.9",
 		"@observablehq/plot": "0.6.15",
 		"astro": "4.16.1",
+		"p5": "1.11.3",
 		"typescript": "5.5.4"
 	},
 	"devDependencies": {
 		"@technologiestiftung/semantic-release-config": "1.2.4",
+		"@types/p5": "1.7.6",
 		"semantic-release": "24.2.3"
 	},
 	"prettier": {

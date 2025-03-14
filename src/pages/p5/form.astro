@@ -1,0 +1,641 @@
+---
+import Layout from "../../layouts/default.astro";
+---
+
+<Layout>
+	<article>
+		<header>
+			<h1>Form</h1>
+			<p>
+				p5.js tries to make it as easy as possible to express your ideas using
+				code. There are many built in functions to draw shapes, text, images and
+				more to the canvas. This article will give you a starting point for
+				drawing with primitive shapes.
+			</p>
+		</header>
+		<section>
+			<h2>Drawing Order</h2>
+			<p>
+				Drawing in p5.js happens sequentially. The order within the setup or
+				draw function matters. The last call to a drawing function draws over
+				the previous ones. In the sketch below you see three ellipses drawn to
+				the canvas. The ellipses is drawn by setting a position as <code>x</code
+				> and <code>y</code> coordinate and then setting the <code>width</code> and
+				<code>height</code>. The parameters are passed to the ellipses function
+				in that order separated by commas. Before the ellipses are drawn the
+				canvas is filled with a light yellow color. We will learn more about the <code
+					>background</code
+				> and other color functions later. We also only use the <code
+					>setup</code
+				> function here. The <code>draw</code> function is empty. If you read our
+				article <a
+					href="https://codepen.io/ff6347/pen/dyxMREW/c2cf8eb2c92d703729360176408a5dbe?editors=0000"
+					target="_blank"
+					>&OpenCurlyDoubleQuote;Anatomy of a Sketch&CloseCurlyDoubleQuote;</a
+				> you might remember that the <code>setup</code> function is called once
+				when the sketch starts. This means this is a static image and the program
+				ends with the last call to the <code>ellipse</code> function.
+			</p>
+
+			<figure>
+				<img
+					src="https://assets.codepen.io/484641/drawing-order.png"
+					alt="three ellipses drawn in different order"
+				/>
+				<figcaption>
+					<pre><code>function setup() &lcub;
+		background("lightgoldenrodyellow");
+		// ellipse (x, y, width, height)
+		ellipse(45, 45, 10, 10);
+		ellipse(50, 50, 10, 10);
+		ellipse(55, 55, 10, 10);
+	&rcub;
+	function draw() &lcub;&rcub;</code></pre>
+				</figcaption>
+			</figure>
+		</section>
+		<section>
+			<h2>2D Shapes</h2>
+			<p>
+				In p5.js we can make use of many shapes for drawing something to the
+				canvas. These shapes can be devided into four categories.
+			</p>
+
+			<ul>
+				<li>Geometric shapes</li>
+				<li>Freeform shapes</li>
+				<li>Curve shapes</li>
+				<li>Vertex shapes</li>
+			</ul>
+			<p>
+				As the the geometric shapes we have: <code>rect</code>, <code
+					>square</code
+				>, <codee>ellipse</codee>, <code>arc</code>, <code>circle</code> and <code
+					>point</code
+				>. The freeform shapes are: <code>quad</code>, <code>triangle</code> and
+				<code>line</code>. The geometric shapes have a similar set of
+				parameters. It is allways a position as <code>x</code> and <code>y</code
+				> coordinate and then parameters like <code>width</code> and <code
+					>height</code
+				> or radius for example. At the end of this article you will find a list
+				links to the p5.js reference where you can read more about the parameters.
+			</p>
+			<p class="note">
+				The curve shapes and vertex shapes are more complex and will be
+				discussed later.
+			</p>
+			<p>
+				<h3>Stroke and Fill</h3>
+				All of these shapes are affected by the <code>stroke</code>, <code
+					>strokeWeight</code
+				>, <code>noStroke</code>, <code>fill</code> and <code>noFill</code> functions.
+				Except for the <code>point</code> shape. It has no <code>fill</code> as a
+				point has no area. The functions <code>stroke</code> and <code
+					>fill</code
+				> take a color as a parameter. For simplicity we currently only use named
+				colors. We will dive into colors later on. Find and bookmark some nice named
+				colors at <a href="https://colornames.inpyjamas.dev" target="_blank"
+					>colornames.inpyjamas.dev</a
+				>. The functions <code>noStroke</code> and <code>noFill</code> are used to
+				remove the stroke or fill from a shape. With the <code
+					>strokeWeight</code
+				> function we can set the width of the stroke. Below you see some sample
+				code that draws different shapes with different settings.
+			</p>
+			<figure>
+				<img
+					src="https://assets.codepen.io/484641/house-1.png"
+					alt="A house drawn with different shapes"
+				/>
+				<figcaption>
+					<pre><code>function setup&lpar;&rpar; &lcub;
+		createCanvas&lpar;100, 100&rpar;&semi;
+		background&lpar;'lightgoldenrodyellow'&rpar;&semi;
+		// sun
+		strokeWeight&lpar;3&rpar;&semi;
+		stroke&lpar;'orange'&rpar;&semi;
+		fill&lpar;'coral'&rpar;&semi;
+		circle&lpar;24, 55, 17&rpar;&semi;
+		noStroke&lpar;&rpar;&semi;
+		// house
+		stroke&lpar;'lavenderblush'&rpar;&semi;
+		strokeWeight&lpar;1&rpar;&semi;
+		line&lpar;0, 57, 100, 57&rpar;&semi;
+		noStroke&lpar;&rpar;&semi;
+		fill&lpar;'lavender'&rpar;&semi;
+		rect&lpar;30, 40, 40, 17&rpar;&semi;
+		//roof
+		quad&lpar;35, 30, 65, 30, 70, 40, 30, 40&rpar;&semi;
+		// land
+		noStroke&lpar;&rpar;&semi;
+		fill&lpar;'darkseagreen'&rpar;&semi;
+		rect&lpar;0, 57, 100, 43&rpar;&semi;
+	&rcub;
+	function draw&lpar;&rpar; &lcub;&rcub;</code></pre>
+				</figcaption>
+			</figure>
+		</section>
+		<section>
+			<h2>Drawing Modes</h2>
+			<p>
+				The geometric shapes are mostly drawn based on one x/y position on the
+				canvas (see also our article about <a
+					href="https://codepen.io/ff6347/pen/LYwNLjG/3f73dccac84aec103d5e9ff4ee20d1c7?editors=1000"
+					target="_blank"
+					>&OpenCurlyDoubleQuote;The Coordinate System&CloseCurlyDoubleQuote;</a
+				>) and then altered by using parameters like their width or height
+				(except for the <code>CORNERS</code> mode). These shapes all have a acompaning
+				mode control function that allows us to draw them in different ways.
+			</p>
+			<p class="note">
+				Calls to the <code>rectMode</code> and <code>ellipseMode</code> functions
+				are made before the drawing functions. Also the passed parameters ( <code
+					>CORNER</code
+				>
+				<code>CENTER</code>
+				<code>RADIUS</code>
+				<code>CORNERS</code>) are constants provided by p5.js. They are written
+				in uppercase and without quotes.
+			</p>
+			<table>
+				<tr>
+					<th>Control function</th>
+					<th>Possible modes</th>
+					<th>Affected shapes</th>
+					<th>Docs</th>
+				</tr>
+				<tr>
+					<td>
+						<code>rectMode</code>
+					</td>
+					<td>
+						<code>CORNER</code>
+						<code>CENTER</code>
+						<code>RADIUS</code>
+						<code>CORNERS</code>
+					</td>
+					<td>
+						<code>rect</code>
+						<code>square</code>
+					</td>
+					<td
+						><a href="https://p5js.org/reference/p5/rectMode/" target="_blank"
+							>rectMode</a
+						></td
+					>
+				</tr>
+				<tr>
+					<td> </td>
+				</tr>
+				<tr>
+					<td>
+						<code>ellipseMode</code>
+					</td>
+					<td>
+						<code>CORNER</code>
+						<code>CENTER</code>
+						<code>RADIUS</code>
+						<code>CORNERS</code>
+					</td>
+					<td>
+						<code>ellipse</code>
+						<code>arc</code>
+						<code>circle</code>
+					</td>
+					<td
+						><a
+							href="https://p5js.org/reference/p5/ellipseMode/"
+							target="_blank">ellipseMode</a
+						></td
+					>
+				</tr>
+			</table>
+			<h3><code>rectMode</code></h3>
+			<p>
+				Below you see the different modes applied to the same <code>rect</code> and
+				<code>ellipse</code>. For brevity we only show the drawing calls here
+				and omit the calls to <code>setup</code> or <code>draw</code>.
+			</p>
+			<figure>
+				<img
+					src="https://assets.codepen.io/484641/rect-center.png"
+					alt="A rectangle drawn with the CENTER mode"
+				/>
+				<figcaption>
+					<pre><code>rectMode(CENTER);
+	rect(50, 50, 10, 10);</code></pre>
+				</figcaption>
+			</figure>
+			<figure>
+				<img
+					src="https://assets.codepen.io/484641/rect-corner.png"
+					alt="A rectangle drawn with the CORNER mode"
+				/>
+				<figcaption>
+					<pre><code>rectMode(CORNER);
+	rect(50, 50, 10, 10);</code></pre>
+				</figcaption>
+			</figure>
+			<figure>
+				<img
+					src="https://assets.codepen.io/484641/rect-radius.png"
+					alt="A rectangle drawn with the RADIUS mode"
+				/>
+				<figcaption>
+					<pre><code>rectMode(RADIUS);
+	rect(50, 50, 10, 10);</code></pre>
+				</figcaption>
+			</figure>
+			<figure>
+				<img
+					src="https://assets.codepen.io/484641/rect-corners.png"
+					alt="A rectangle drawn with the CORNERS mode"
+				/>
+				<figcaption>
+					<pre><code>rectMode(CORNERS);
+	rect(50, 50, 10, 10);</code></pre>
+				</figcaption>
+			</figure>
+			<h3><code>ellipseMode</code></h3>
+			<figure>
+				<img
+					src="https://assets.codepen.io/484641/ellipse-center.png"
+					alt="An ellipse drawn with the CENTER mode"
+				/>
+				<figcaption>
+					<pre><code>ellipseMode(CENTER);
+	ellipse(50, 50, 10, 10);</code></pre>
+				</figcaption>
+			</figure>
+			<figure>
+				<img
+					src="https://assets.codepen.io/484641/ellipse-corner.png"
+					alt="An ellipse drawn with the CORNER mode	"
+				/>
+				<figcaption>
+					<pre><code>ellipseMode(CORNER);
+	ellipse(50, 50, 10, 10);</code></pre>
+				</figcaption>
+			</figure>
+			<figure>
+				<img
+					src="https://assets.codepen.io/484641/ellipse-radius.png"
+					alt="An ellipse drawn with the RADIUS mode"
+				/>
+				<figcaption>
+					<pre><code>ellipseMode(RADIUS);
+	ellipse(50, 50, 10, 10);</code></pre>
+				</figcaption>
+			</figure>
+			<figure>
+				<img
+					src="https://assets.codepen.io/484641/ellipse-corners.png"
+					alt="An elluipse drawn with the CORNERS mode"
+				/>
+				<figcaption>
+					<pre><code>ellipseMode(CORNERS);
+	ellipse(50, 50, 60, 60); </code></pre>
+				</figcaption>
+			</figure>
+			<p class="note">
+				We had to change the second set of parameters for the <code
+					>ellipseMode(CORNERS)</code
+				> mode here, since drawing the ellipse with values smaller then the first
+				pair throws an error. This <a
+					href="https://github.com/processing/p5.js/issues/7333"
+					target="_blank">🐛</a
+				> will be fixed in version 1.11.1 or higher. At the time of writing this
+				article the latest version is 1.11.0.
+			</p>
+		</section>
+		<section>
+			<h2>Sketch</h2>
+			<div id="sketch"></div>
+			<p>
+				In the sketch above you see nearly all the drawing functions used with
+				paramters we discussed in this article.
+				<code>point</code>
+				<code>circle</code>, <code>arc</code>, <code>rect</code>, <code
+					>square</code
+				>, <code>triangle</code>, <code>line</code>, <code>quad</code>. We also
+				make use of <code>ellipseMode</code> and <code>rectMode</code> to draw the
+				shapes in different ways. There are calls to <code>stroke</code> and <code
+					>fill</code
+				> to set the stroke and fill color. There is also the call to the <code
+					>radians</code
+				> function to convert angles from degrees to radians.
+			</p>
+
+			<p class="note">
+				functions in p5.js that use angles accept the angle in radians by
+				default. If you need to convert degrees to radians you can use the <code
+					>radians</code
+				> function. Or you can use the <code>angleMode</code> function to set the
+				mode to degrees. There is also the <code>degrees</code> function to convert
+				radians to degrees.
+			</p>
+		</section>
+		<section>
+			<h2>Tasks</h2>
+			<p>
+				Clone this sketch with the button below and play with the different
+				drawing functions.
+			</p>
+			<ul>
+				<li>
+					Try to create variables for the hardcoded values and pass them as
+					parameters to the drawing functions.
+				</li>
+				<li>
+					Reuse the variables for the drawing functions to make it easier to
+					change the position and size of the shapes.
+				</li>
+				<li>Use your own colors and stroke weights.</li>
+				<li>Try to draw a house with a door and a window.</li>
+				<li>
+					Change the <code>angleMode</code> to degrees to remove that nasty calls
+					to <code>radians</code>.
+				</li>
+				<li>
+					Lookup the <code>vertex</code>, <code>curve</code> and <code
+						>curveVertex</code
+					> functions and try to draw more complex shapes.
+				</li>
+			</ul>
+			<button id="create-codepen">clone this sketch</button>
+
+			<!-- 		<button id="create-codepen">clone this sketch!</button> -->
+		</section>
+		<section>
+			<h2>Referenced Methods</h2>
+			<ul>
+				<li>
+					<a href="https://p5js.org/reference/#/p5/point" target="_blank"
+						><code>point</code></a>
+				</li>
+				<li>
+					<a href="https://p5js.org/reference/#/p5/rect" target="_blank"
+						><code>rect</code></a>
+				</li>
+				<li>
+					<a href="https://p5js.org/reference/#/p5/square" target="_blank"
+						><code>square</code></a>
+				</li>
+				<li>
+					<a href="https://p5js.org/reference/#/p5/ellipse" target="_blank"
+						><code>ellipse</code></a>
+				</li>
+				<li>
+					<a href="https://p5js.org/reference/#/p5/circle" target="_blank"
+						><code>circle</code></a>
+				</li>
+				<li>
+					<a href="https://p5js.org/reference/#/p5/arc" target="_blank"
+						><code>arc</code></a>
+				</li>
+				<li>
+					<a href="https://p5js.org/reference/#/p5/quad" target="_blank"
+						><code>quad</code></a>
+				</li>
+				<li>
+					<a href="https://p5js.org/reference/#/p5/triangle" target="_blank"
+						><code>triangle</code></a>
+				</li>
+				<li>
+					<a href="https://p5js.org/reference/#/p5/line" target="_blank"
+						><code>line</code></a>
+				</li>
+				<li>
+					<a href="https://p5js.org/reference/#/p5/rectMode" target="_blank"
+						><code>rectMode</code></a>
+				</li>
+				<li>
+					<a href="https://p5js.org/reference/#/p5/ellipseMode" target="_blank"
+						><code>ellipseMode</code></a>
+				</li>
+				<li>
+					<a href="https://p5js.org/reference/#/p5/stroke" target="_blank"
+						><code>stroke</code></a>
+				</li>
+				<li>
+					<a href="https://p5js.org/reference/#/p5/strokeWeight" target="_blank"
+						><code>strokeWeight</code></a>
+				</li>
+				<li>
+					<a href="https://p5js.org/reference/#/p5/noStroke" target="_blank"
+						><code>noStroke</code></a>
+				</li>
+				<li>
+					<a href="https://p5js.org/reference/#/p5/fill" target="_blank"
+						><code>fill</code></a>
+				</li>
+				<li>
+					<a href="https://p5js.org/reference/#/p5/noFill" target="_blank"
+						><code>noFill</code></a>
+				</li>
+				<li>
+					<a href="https://p5js.org/reference/#/p5/background" target="_blank"
+						><code>background</code></a>
+				</li>
+				<li>
+					<a href="https://p5js.org/reference/#/p5/createCanvas" target="_blank"
+						><code>createCanvas</code></a>
+				</li>
+				<li>
+					<a href="https://p5js.org/reference/#/p5/radians" target="_blank"
+						><code>radians</code></a>
+				</li>
+				<li>
+					<a href="https://p5js.org/reference/#/p5/angleMode" target="_blank"
+						><code>angleMode</code></a>
+				</li>
+				<li>
+					<a href="https://p5js.org/reference/#/p5/degrees" target="_blank"
+						><code>degrees</code></a>
+				</li>
+				<li>
+					<a href="https://p5js.org/reference/#/p5/curve" target="_blank"
+						><code>curve</code></a>
+				</li>
+				<li>
+					<a href="https://p5js.org/reference/#/p5/vertex" target="_blank"
+						><code>vertex</code></a>
+				</li>
+				<li>
+					<a href="https://p5js.org/reference/#/p5/curveVertex" target="_blank"
+						><code>curveVertex</code></a>
+				</li>
+				<li>
+					<a href="https://p5js.org/reference/#/p5/setup" target="_blank"
+						><code>setup</code></a>
+				</li>
+				<li>
+					<a href="https://p5js.org/reference/#/p5/draw" target="_blank"
+						><code>draw</code></a>
+				</li>
+			</ul>
+		</section>
+	</article>
+
+	<style>
+		button#create-codepen {
+			border-radius: 0px;
+			border: 2px solid var(--highlight-color);
+			background-color: var(--light-color);
+			color: var(--text-color);
+			text-transform: uppercase;
+		}
+
+		button#create-codepen:hover {
+			border-radius: 0px;
+			text-decoration: underline;
+			background-color: var(--dark-color);
+			color: var(--text-color-light);
+			transition: all 0.2s ease;
+		}
+
+		button#create-codepen:active {
+			border-radius: 0px;
+			border: 2px solid var(--highlight-color);
+			background-color: var(--dark-color);
+			color: var(--text-color-light);
+		}
+	</style>
+	<script is:inline>
+		const code = `function setup() {
+		const canvas = createCanvas(100, 100);
+		canvas.parent("sketch");
+
+		background("black");
+		noFill();
+		stroke("white");
+
+		point(25, 12.5);
+		point(75, 12.5);
+		point(25, 87.5);
+		point(75, 87.5);
+
+		ellipseMode(CENTER);
+		circle(50, 50, 50);
+		arc(50, 50, 75, 75, radians(45), radians(135), OPEN);
+		rectMode(CENTER);
+		rect(50, 50, 50, 50);
+
+		triangle(50, 25, 75, 75, 25, 75);
+
+		line(25, 25, 75, 75);
+		square(50, 50, 25);
+		quad(50, 25, 75, 50, 50, 75, 25, 50);
+	}
+	function draw() {}`;
+
+		document.getElementById("create-codepen").addEventListener("click", () => {
+			const data = {
+				title: "The x/y coordinate system",
+				description:
+					"Part of the seminar fundamentals of digital communication at University of Arts Braunschweig in 2024/25",
+				private: true,
+				tags: ["digicom-2425"],
+				editors: "111",
+				layout: "left",
+				html: '<div id="sketch"></div>',
+				css: "body{display:flex;height:100svh;flex-direction:column;justify-content:center;align-items:center;}",
+				js: code,
+				css_external: [
+					"https://assets.qawsed.site/css/reset.css",
+					"https://assets.qawsed.site/css/base.css",
+				],
+				js_external: [
+					"https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.10.0/p5.min.js",
+				],
+			};
+			const form = document.createElement("form");
+			form.method = "POST";
+			form.action = "https://codepen.io/pen/define";
+			form.target = "_blank";
+			form.innerHTML = `<input type="hidden" name="data" value='${JSON.stringify(data)}'>`;
+			document.body.appendChild(form);
+			form.submit();
+			document.body.removeChild(form);
+		});
+	</script>
+</Layout>
+
+<style>
+	#sketch {
+		margin-bottom: var(--s2);
+	}
+
+	table {
+		border-collapse: collapse;
+	}
+
+	table th {
+		padding-left: var(--s1);
+		padding-right: var(--s1);
+		border: none;
+		border-right: 1px dashed black;
+		border-bottom: 1px dashed black;
+	}
+	table td {
+		padding-left: var(--s1);
+		padding-right: var(--s1);
+		border: none;
+		border-right: 1px dashed black;
+	}
+
+	table th:last-child,
+	table td:last-child {
+		border-right: none;
+	}
+
+	figure {
+		margin: 0;
+		display: flex;
+		flex-direction: row;
+		gap: var(--s1);
+		/* align-items: center; */
+	}
+	figure {
+		margin-bottom: var(--s1);
+	}
+	figure img {
+		width: 100px;
+		height: 100px;
+	}
+	figure figcaption pre {
+		min-height: 100px;
+		padding-top: 0;
+		padding-bottom: 0;
+	}
+</style>
+
+<script is:inline src="/assets/js/p5.min.js"></script>
+<script is:inline>
+	function setup() {
+		const canvas = createCanvas(100, 100);
+		canvas.parent("sketch");
+
+		background("black");
+		noFill();
+		stroke("white");
+
+		point(25, 12.5);
+		point(75, 12.5);
+		point(25, 87.5);
+		point(75, 87.5);
+
+		ellipseMode(CENTER);
+		circle(50, 50, 50);
+		arc(50, 50, 75, 75, radians(45), radians(135), OPEN);
+		rectMode(CENTER);
+		rect(50, 50, 50, 50);
+
+		triangle(50, 25, 75, 75, 25, 75);
+
+		line(25, 25, 75, 75);
+		square(50, 50, 25);
+		quad(50, 25, 75, 50, 50, 75, 25, 50);
+	}
+	function draw() {}
+</script>
