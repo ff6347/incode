@@ -130,19 +130,21 @@ import Layout from "../../layouts/default.astro";
 			color: var(--text-color-light);
 		}
 	</style>
-	<script>
-		document.getElementById("create-codepen").addEventListener("click", () => {
-			const data = {
-				title: "The x/y coordinate system",
-				description:
-					"Part of the seminar fundamentals of digital communication at University of Arts Braunschweig in 2024/25",
-				private: true,
-				tags: ["digicom-2425"],
-				editors: "111",
-				layout: "left",
-				html: '<div id="sketch"></div>',
-				css: "body{display:flex;height:100svh;flex-direction:column;justify-content:center;align-items:center;}",
-				js: `
+	<script is:inline>
+		const button = document.getElementById("create-codepen");
+		if (button) {
+			button.addEventListener("click", () => {
+				const data = {
+					title: "The x/y coordinate system",
+					description:
+						"Part of the seminar fundamentals of digital communication at University of Arts Braunschweig in 2024/25",
+					private: true,
+					tags: ["digicom-2425"],
+					editors: "111",
+					layout: "left",
+					html: '<div id="sketch"></div>',
+					css: "body{display:flex;height:100svh;flex-direction:column;justify-content:center;align-items:center;}",
+					js: `
 			function setup() {
 		const canvas = createCanvas(100, 100);
 		canvas.parent("sketch");
@@ -158,23 +160,24 @@ import Layout from "../../layouts/default.astro";
 	function draw() {}
 
 			`,
-				css_external: [
-					"https://assets.qawsed.site/css/reset.css",
-					"https://assets.qawsed.site/css/base.css",
-				],
-				js_external: [
-					"https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.10.0/p5.min.js",
-				],
-			};
-			const form = document.createElement("form");
-			form.method = "POST";
-			form.action = "https://codepen.io/pen/define";
-			form.target = "_blank";
-			form.innerHTML = `<input type="hidden" name="data" value='${JSON.stringify(data)}'>`;
-			document.body.appendChild(form);
-			form.submit();
-			document.body.removeChild(form);
-		});
+					css_external: [
+						"https://assets.qawsed.site/css/reset.css",
+						"https://assets.qawsed.site/css/base.css",
+					],
+					js_external: [
+						"https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.10.0/p5.min.js",
+					],
+				};
+				const form = document.createElement("form");
+				form.method = "POST";
+				form.action = "https://codepen.io/pen/define";
+				form.target = "_blank";
+				form.innerHTML = `<input type="hidden" name="data" value='${JSON.stringify(data)}'>`;
+				document.body.appendChild(form);
+				form.submit();
+				document.body.removeChild(form);
+			});
+		}
 	</script>
 </Layout>
 
