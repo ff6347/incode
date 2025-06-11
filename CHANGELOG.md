@@ -1,3 +1,16 @@
+# [1.4.0](https://github.com/ff6347/incode/compare/v1.3.0...v1.4.0) (2025-06-11)
+
+
+### Bug Fixes
+
+* Error on inline script ([034644b](https://github.com/ff6347/incode/commit/034644ba08db86742ec561ef5d588aae76f0896b))
+
+
+### Features
+
+* Add material from wise2024/25 ([bc78b8a](https://github.com/ff6347/incode/commit/bc78b8aadcf898c5d234d86f45baaa8005b22004))
+* Add p5.js teaching page with links to resources ([f59a938](https://github.com/ff6347/incode/commit/f59a938b5eb8443471fb31264aa9e6be322776d9))
+
 # [1.3.0](https://github.com/ff6347/incode/compare/v1.2.0...v1.3.0) (2024-11-12)
 
 
