@@ -19,7 +19,7 @@ https://assets.qawsed.site/css/reset.css
 	--highlight-color: var(--cyclamen);
 	--primary-color: var(--cyclamen);
 	--secondary-color: var(--vista-blue);
-	--code-background-color: hsl(60, 90%, 90%);
+	--code-background-color: hsl(0, 0%, 87%);
 
 	--link-color: hsl(from var(--primary-color) h s calc(l * 0.8));
 	--link-hover-color: var(--vista-blue);
@@ -51,7 +51,7 @@ html {
 }
 body {
 	/* or other fonts https://modernfontstacks.com/ */
-	font-family: Seravek, 'Gill Sans Nova', Ubuntu, Calibri, 'DejaVu Sans',
+	font-family: Seravek, "Gill Sans Nova", Ubuntu, Calibri, "DejaVu Sans",
 		source-sans-pro, sans-serif;
 	font-weight: normal;
 	line-height: 1.5;
@@ -103,8 +103,8 @@ code {
 }
 
 code {
-	font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas,
-		'DejaVu Sans Mono', monospace;
+	font-family: ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Consolas,
+		"DejaVu Sans Mono", monospace;
 	font-size: 0.89em;
 	background-color: var(--code-background-color);
 }
@@ -160,7 +160,7 @@ h6 {
 	color: var(--light-color);
 
 	position: absolute;
-	content: 'Note';
+	content: "Note";
 	font-weight: 600;
 	background-color: var(--highlight-color);
 	padding: 0 var(--s1);
