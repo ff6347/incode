@@ -1,0 +1,224 @@
+---
+import Layout from "../../layouts/default.astro";
+---
+
+<Layout>
+	<article>
+		<header>
+			<h1>The Coordinate System</h1>
+		</header>
+		<section>
+			<h2>x/y</h2>
+			<p>
+				In p5.js the coordinate system starts in the upper left corner. This is
+				the point where <code>x = 0</code> and <code>y = 0</code>. The x axis
+				increases to the right. The y axis increases downwards. We can draw a
+				dot using the command <code>point(x,y)</code> at that location.
+			</p>
+		</section>
+
+		<section>
+			<figure>
+				<img src="/assets/images/the-coordinate-system_1.svg" alt="" />
+				<figcaption>
+					<p>
+						In the plot above you see the coordinate system as used by default
+						in p5.js and three dots.
+					</p>
+				</figcaption>
+			</figure>
+		</section>
+		<section>
+			<h2>Sketch</h2>
+			<div id="sketch"></div>
+			<p>
+				In this sketch we draw three points. A <code>darkgrey</code> one at <code
+					>x = 10</code
+				> and <code>y = 10</code>, a <code>gold</code> one at <code>50, 50</code
+				> (remember first parameter for the <code>point</code> function is <code
+					>x</code
+				>, the second <code>y</code>) and a <code>blueviolet</code> one at a <code
+					>random</code
+				> position on the canvas.
+			</p>
+			<p class="note">
+				A point has no volume or area as we could call it. Therefore we can only
+				change its color using the <code>stroke</code> method. The <code
+					>strokeWeight</code
+				> method can be used to change its size.
+			</p>
+		</section>
+		<section>
+			<h2>Tasks</h2>
+
+			<ul>
+				<li>
+					Use the button below to clone this sketch into your account <em
+						>(don't forget to save it)</em
+					>
+				</li>
+				<li>Explore the x/y space of your canvas</li>
+				<li>Find out how to change the size of the canvas</li>
+				<li>Draw more points then just three</li>
+				<li>Create patterns</li>
+				<li>
+					Alter the <code>strokeWeight</code> and <code>stroke</code> color <em
+						>(find other <a
+							href="https://colornames.inpyjamas.dev/"
+							target="_blank"
+							>named css colors here &#x261B;
+						</a>)</em
+					>
+				</li>
+				<li>
+					Learn more about the <code>random</code> function. Can you pass more then
+					one parameter?
+				</li>
+			</ul>
+
+			<button id="create-codepen">clone this sketch!</button>
+		</section>
+		<section>
+			<h2 id="ref">Referenced Methods</h2>
+			<p>See the p5.js reference to learn more about the used methods.</p>
+			<ul>
+				<li>
+					<a href="https://p5js.org/reference/p5/point/" target="_blank"
+						><code>point</code></a
+					>
+				</li>
+				<li>
+					<a href="https://p5js.org/reference/p5/stroke/" target="_blank"
+						><code>stroke</code></a
+					>
+				</li>
+				<li>
+					<a href="https://p5js.org/reference/p5/strokeWeight/" target="_blank"
+						><code>strokeWeight</code></a
+					>
+				</li>
+				<li>
+					<a href="https://p5js.org/reference/p5/random/" target="_blank"
+						><code>random</code></a
+					>
+				</li>
+			</ul>
+		</section>
+	</article>
+
+	<style>
+		button#create-codepen {
+			border-radius: 0px;
+			border: 2px solid var(--highlight-color);
+			background-color: var(--light-color);
+			color: var(--text-color);
+			text-transform: uppercase;
+		}
+
+		button#create-codepen:hover {
+			border-radius: 0px;
+			text-decoration: underline;
+			background-color: var(--dark-color);
+			color: var(--text-color-light);
+			transition: all 0.2s ease;
+		}
+
+		button#create-codepen:active {
+			border-radius: 0px;
+			border: 2px solid var(--highlight-color);
+			background-color: var(--dark-color);
+			color: var(--text-color-light);
+		}
+	</style>
+	<script is:inline>
+		const button = document.getElementById("create-codepen");
+		if (button) {
+			button.addEventListener("click", () => {
+				const data = {
+					title: "The x/y coordinate system",
+					description:
+						"Part of the seminar fundamentals of digital communication at University of Arts Braunschweig in 2024/25",
+					private: true,
+					tags: ["digicom-2425"],
+					editors: "111",
+					layout: "left",
+					html: '<div id="sketch"></div>',
+					css: "body{display:flex;height:100svh;flex-direction:column;justify-content:center;align-items:center;}",
+					js: `
+			function setup() {
+		const canvas = createCanvas(100, 100);
+		canvas.parent("sketch");
+		background("lightgoldenrodyellow");
+		stroke("darkgrey");
+		strokeWeight(8);
+		point(10, 10);
+		stroke("gold");
+		point(50, 50);
+		stroke("blueviolet");
+		point(random(100), random(100));
+	}
+	function draw() {}
+
+			`,
+					css_external: [
+						"https://assets.qawsed.site/css/reset.css",
+						"https://assets.qawsed.site/css/base.css",
+					],
+					js_external: [
+						"https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.10.0/p5.min.js",
+					],
+				};
+				const form = document.createElement("form");
+				form.method = "POST";
+				form.action = "https://codepen.io/pen/define";
+				form.target = "_blank";
+				form.innerHTML = `<input type="hidden" name="data" value='${JSON.stringify(data)}'>`;
+				document.body.appendChild(form);
+				form.submit();
+				document.body.removeChild(form);
+			});
+		}
+	</script>
+</Layout>
+
+<style>
+	body {
+		height: 100svh;
+	}
+
+	figure {
+		display: flex;
+		flex-direction: column;
+		margin: 0 auto;
+		max-width: 500px;
+	}
+
+	figure img[src$=".svg"] {
+		max-width: 100%;
+		max-height: 100%;
+		width: auto;
+		height: auto;
+		object-fit: contain; /* Ensures the image maintains its aspect ratio */
+	}
+
+	#sketch {
+		margin-bottom: 16px;
+	}
+</style>
+
+<script is:inline src="/assets/js/p5.min.js"></script>
+<script is:inline>
+	function setup() {
+		const canvas = createCanvas(100, 100);
+		canvas.parent("sketch");
+		background("lightgoldenrodyellow");
+		stroke("darkgrey");
+		strokeWeight(8);
+		point(10, 10);
+		stroke("gold");
+		point(50, 50);
+		stroke("blueviolet");
+		point(random(100), random(100));
+	}
+	function draw() {}
+</script>

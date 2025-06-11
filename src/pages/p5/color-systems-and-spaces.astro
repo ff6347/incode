@@ -1,0 +1,763 @@
+---
+import Layout from "../../layouts/default.astro";
+---
+
+<Layout>
+	<style></style>
+
+	<article>
+		<header>
+			<h1 id="color">Color</h1>
+			<p>
+				In this article we want to take a look at different color systems and
+				spaces and how they work. How can we use them in our projects?
+			</p>
+		</header>
+		<section>
+			<h2 id="subtractivecolorsystems">Subtractive color systems</h2>
+			<p>
+				Many have already wrapped their heads around colors and how they mix,
+				behave together and can be systematically applied to artworks. For
+				example <a href="https://en.wikipedia.org/wiki/Theory_of_Colours"
+					>Goethe's color theories</a
+				> or the color theories by <a
+					href="https://en.wikipedia.org/wiki/Johannes_Itten">Johannes Itten</a
+				>. These theories are all working in subtractive color systems. That
+				means that they are based on pigments and how they mix together. It is
+				called subtractive because pigments absorb certain wavelengths of light
+				and reflect others. All colors mixed together create the color black.
+			</p>
+			<figure>
+				<img
+					src="https://assets.codepen.io/484641/Goethe,_Farbenkreis_zur_Symbolisierung_des_menschlichen_Geistes-_und_Seelenlebens,_1809.jpg"
+					alt="Farbenkreis, aquarellierte Federzeichnung von Goethe, 1809, Original: Freies Deutsches Hochstift – Frankfurter Goethe-Museum"
+				/>
+				<figcaption>
+					Farbenkreis, aquarellierte Federzeichnung von Goethe, 1809, Original:
+					Freies Deutsches Hochstift – Frankfurter Goethe-Museum
+				</figcaption>
+			</figure>
+			<figure>
+				<img
+					src="https://assets.codepen.io/484641/Farbkreis_Itten_1961.svg"
+					alt="Farbkreis nach Johannes Itten (1961)"
+				/>
+				<figcaption>Farbkreis nach Johannes Itten (1961)</figcaption>
+			</figure>
+		</section>
+		<section>
+			<h2 id="additivecolorsystems">Additive color systems</h2>
+			<p>
+				In comparison to the subtractive systems we have the additive colors
+				systems. These are based on the physics of light. White light is the
+				combination of all colors. We add colors to mix new ones. If we take all
+				colors away we are left with black. These colors are nowadays digitally
+				represented using the CMYK color space. This means that we use the
+				colors cyan, magenta, yellow and black (key) to create new colors. A
+				full CMYK black color coverage on our paper would mean we apply 400% of
+				color. Normal papers are not able to absorb that much ink. In print we
+				normally work with a black that has around 300% of color for images. The
+				body text however is often printed with 100% of key (black) ink. So you
+				can mix your black from CMY or add black ink and reduce one of the other
+				colors. This is a design choice you will hae to make when working in
+				print.
+			</p>
+			<p class="note">
+				When working for newspapers you will have to use way less color. It all
+				depends on the paper you are using.
+			</p>
+		</section>
+		<section>
+			<h2 id="namedcolorsincssp5js">Named Colors in CSS/p5js</h2>
+			<p>
+				To make our life a little easier we can use named colors in CSS or p5js.
+				There are 147 named colors in CSS. Checkout <a
+					href="https://colornames.inpyjamas.dev/">colornames.inpyjamas.dev</a
+				> for all of them or one of the many other tools out there. E.g. <a
+					href="https://htmlcolorcodes.com/color-names/">htmlcolorcodes.com</a
+				>. All of these colors are in the RGB color space and are only an alias
+				for color in the RGB color space.
+			</p>
+		</section>
+		<section>
+			<h2 id="rgbcolors">RGB colors</h2>
+			<p>
+				The RGB color space is an additive color space. It is based on the light
+				emitting diodes (LEDs) that are used in our screens. The RGB color space
+				is based on the three primary colors red, green and blue. Each color can
+				have a value between 0 and 255. Where 0 is the lowest intensity and 255
+				is the highest intensity. The color
+				<code>lightgoldenrodyellow</code> for example, can also be represented as
+				<code>RGB</code> color with the following values
+			</p>
+
+			<table>
+				<thead>
+					<tr>
+						<th>RED</th>
+						<th>GREEN</th>
+						<th>BLUE</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>250</td>
+						<td>250</td>
+						<td>210</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<p>
+				This gives us a color space with <code>256 x 256 x 256 = 16777216</code>
+				different colors.
+			</p>
+		</section>
+		<section>
+			<h2 id="hexcolors">Hex colors</h2>
+			<p>
+				HEX colors, e.g. <code>#ff6347</code> are just a different way to represent
+				the RGB color space. Each color is represented by two hexadecimal digits.
+				The first two digits represent the red color, the next two the green and
+				the last two the blue. The digits can have values between <code>00</code
+				> and <code>FF</code>. Hexadecimal is a base-16 numeral system. The
+				calculation is <code>16 × 16 × 16 × 16 × 16 × 16 = 16777216</code>.
+				Which is the same as above for the RGB color space. See <a
+					href="https://allhexcolors.inpyjamas.dev/"
+					>allhexcolors.inpyjamas.dev</a
+				> to kill some time and see all of these colors.
+			</p>
+			<p class="note">
+				The <code>#</code> is not part of the color. It is just a prefix to indicate
+				that the following is a HEX color.
+			</p>
+		</section>
+		<section>
+			<h2 id="theproblemwithrgbcolorspace">The Problem with RGB Color Space</h2>
+			<p>
+				The problem with RGB color space is that it is not a intuitive space. It
+				is hard to understand how to mix colors together to get the color we
+				want and also how to create harmonic color palettes based on an existing
+				color. This is where the HSB color space comes into play.
+			</p>
+			<p>
+				<img
+					src="https://assets.codepen.io/484641/1024px-RGB_Cube_Show_lowgamma_cutout_a.png"
+					alt="RGB Cube by Datumizer Wikimedia"
+				/>
+			</p>
+		</section>
+		<section>
+			<h2 id="hsbhsv">HSB (HSV)</h2>
+			<p>
+				The HSB color space is based on the color wheel. It is a cylindrical
+				coordinate system. The color is represented by three values:
+			</p>
+			<ul>
+				<li><strong>Hue</strong>: The angle on the color wheel.</li>
+				<li>
+					<strong>Saturation</strong>: The distance from the center of the
+					wheel.
+				</li>
+				<li><strong>Brightness</strong>: The height of the color.</li>
+			</ul>
+			<figure>
+				<img
+					src="https://assets.codepen.io/484641/1024px-HSV_color_solid_cylinder_saturation_gray.png"
+					alt="HSV_color_solid_cylinder.png: SharkDderivative work: SharkD  Talk"
+				/>
+				<figcaption>
+					<p>
+						<a
+							href="https://commons.wikimedia.org/wiki/File:HSV_color_solid_cylinder_saturation_gray.png"
+							>HSV <em>color</em> solid_cylinder.png: SharkD derivative work: SharkD
+							&nbsp;Talk</a
+						>, <a href="https://creativecommons.org/licenses/by-sa/3.0"
+							>CC BY-SA 3.0</a
+						>, via Wikimedia Commons
+					</p>
+				</figcaption>
+			</figure>
+			<p>
+				This color system/space allows us to intuitively select colors and also
+				create colors based on a rule set.
+			</p>
+		</section>
+		<section>
+			<h2 id="hsl">HSL</h2>
+			<p>
+				The HSL color space is very similar to the HSB color space. One
+				difference is that the brightness from HSB is represented here as
+				lightness.
+			</p>
+			<figure>
+				<img
+					src="https://assets.codepen.io/484641/1024px-HSL_color_solid_cylinder_saturation_gray.png"
+					alt=""
+				/>
+				<figcaption>
+					<p>
+						<a
+							href="https://commons.wikimedia.org/wiki/File:HSL_color_solid_cylinder_saturation_gray.png"
+							>HSL <em>color</em> solid_cylinder.png: SharkD derivative work: SharkD
+							&nbsp;Talk</a
+						>, <a href="https://creativecommons.org/licenses/by-sa/3.0"
+							>CC BY-SA 3.0</a
+						>, via Wikimedia Commons
+					</p>
+				</figcaption>
+			</figure>
+		</section>
+		<section>
+			<h2 id="hslhsbcomparison">HSL HSB comparison</h2>
+			<p>
+				So what is the difference? One difference is that in HSL to create black
+				or white we just have to change the lightness to 0 or 100. In HSB we
+				would have to set the saturation to 0 and the brightness to 100 to
+				create white. To create black in HSB we would have to set the saturation
+				to 0 and the brightness to 0. Keeping the saturation at 100 would create
+				a bright color of that hue we picked.
+			</p>
+		</section>
+		<section>
+			<h2 id="theproblemwithhsbhsl">The problem with HSB/HSL</h2>
+			<p>
+				Of course there is always room for improvement. The HSB/HSL color spaces
+				are purely based on the color wheel and mathematical calculations. They
+				do not take into account how humans perceive colors.
+			</p>
+			<p>
+				As an example. In the image below we use exactly the same color
+				saturation and brightness in HSB color space. But the green we see
+				"feels" way more intense than the violet.
+			</p>
+			<figure class="sketches">
+				<img
+					src="https://assets.codepen.io/484641/hsb-color-perception.png"
+					alt=""
+					style="width: 200px;"
+				/>
+				<figcaption>
+					<pre><code class="javascript language-javascript">function setup&lpar;&rpar; &lcub;
+		createCanvas&lpar;200, 100&rpar;&semi;
+		colorMode&lpar;HSB&rpar;&semi;
+		noStroke&lpar;&rpar;&semi;
+		const gutter = width / 20&semi;
+		const c1 = color&lpar;100, 100, 100&rpar;&semi;
+		fill&lpar;c1&rpar;&semi;
+		rect&lpar;gutter, gutter, width / 2 &hyphen; gutter &ast; 2, height &hyphen; gutter &ast; 2&rpar;&semi;
+		const c2 = color&lpar;hue&lpar;c1&rpar; &plus; 180, 100, 100&rpar;&semi;
+		fill&lpar;c2&rpar;&semi;
+		rect&lpar;width / 2 &plus; gutter, gutter, width / 2 &hyphen; gutter &ast; 2, height &hyphen; gutter &ast; 2&rpar;&semi;
+		&rcub;
+	function draw&lpar;&rpar; &lcub;&rcub;</code></pre>
+				</figcaption>
+			</figure>
+			<p>
+				To overcome these problems there are other color spaces that take into
+				account how humans perceive colors. The latest addition to the CSS is <a
+					href="https://en.wikipedia.org/wiki/Oklab_color_space#Conversion_to_and_from_Oklch"
+					>okLCH</a
+				> color space which is a cylindrical coordinate system for the <a
+					href="https://en.wikipedia.org/wiki/Oklab_color_space">okLAB</a
+				> color space. Below you a comparison of the HSV color space and the OKLCH
+				color space. The colors in the okLCH color space are more harmonious.
+			</p>
+			<p>
+				<img
+					src="https://assets.codepen.io/484641/Colour_gradient_comparison_of_HSV_and_okLCH.png"
+					alt="OKLCH color space"
+				/>
+			</p>
+			<p>
+				By <a
+					href="//commons.wikimedia.org/wiki/User:Intervex"
+					title="User:Intervex">Intervex</a
+				> - <span class="int-own-work" lang="en">Own work</span>, <a
+					href="http://creativecommons.org/publicdomain/zero/1.0/deed.en"
+					title="Creative Commons Zero, Public Domain Dedication">CC0</a
+				>, <a href="https://commons.wikimedia.org/w/index.php?curid=150545237"
+					>Link</a>
+			</p>
+		</section>
+		<section>
+			<h2 id="colorsinp5js">Colors in p5js</h2>
+			<p>
+				In the default RGB color space we can create and use colors in several
+				ways. To create a color from white over gray to black we can use the
+				following code.
+			</p>
+			<pre><code class="javascript language-javascript">const c = color(128);
+	</code></pre>
+			<p>
+				If we want to give our color an alpha value we can do so by adding an
+				additional value.
+			</p>
+			<pre><code class="javascript language-javascript">const c = color(128, 100);
+	</code></pre>
+			<p>
+				To create a color from the RGB color space we can use the following code
+				(in this case red).
+			</p>
+			<pre><code class="javascript language-javascript">const c = color(255, 0, 0);
+	</code></pre>
+			<p>
+				To create a color from the RGB color space with an alpha value we can
+				use the following code.
+			</p>
+			<pre><code class="javascript language-javascript">const c = color(255, 0, 0, 100);
+	</code></pre>
+		</section>
+		<section>
+			<h2 id="colorsinhsbhsl">Colors in HSB/HSL</h2>
+			<p>
+				Since we are working in p5js we can not make use of such color like
+				okLCH without using a specialized library. To not introduce any new
+				dependencies we will keep using the HSB or HSL color space that comes
+				with p5js.
+			</p>
+			<p>
+				To use the <code>HSB</code> colors we have to use the <code
+					>colorMode(HSB)</code
+				> function.
+			</p>
+			<figure class="sketches">
+				<img
+					src="https://assets.codepen.io/484641/h330-s70-b90.png"
+					alt="pink square h330 s70 b90"
+				/>
+				<figcaption>
+					<pre><code class="javascript language-javascript">function setup&lpar;&rpar; &lcub;
+		createCanvas&lpar;100, 100&rpar;&semi;
+		colorMode&lpar;HSB&rpar;&semi;
+		background&lpar;330, 70, 50&rpar;&semi;
+	&rcub;</code></pre>
+				</figcaption>
+			</figure>
+			<p>The same code in HSL color space.</p>
+			<figure class="sketches">
+				<img
+					src="https://assets.codepen.io/484641/h330-s70-l90.png"
+					alt="pink square h330 s70 b90"
+				/>
+				<figcaption>
+					<pre><code class="javascript language-javascript">function setup&lpar;&rpar; &lcub;
+		createCanvas&lpar;100, 100&rpar;&semi;
+		colorMode&lpar;HSL&rpar;&semi;
+		background&lpar;330, 70, 50&rpar;&semi;
+		&rcub;</code></pre>
+				</figcaption>
+			</figure>
+			<p>
+				The <code>colorMode</code> function allows us not only the switch between
+				HSB, HSL and RGB (the default) but also allows to change the value ranges
+				we are working with.
+			</p>
+			<p>
+				Below we define the ranges for hue to be between 0 and 360, for
+				saturation and brightness to be between 0 and 100 and the last value for
+				alpha to be between 0 and 100.
+			</p>
+			<pre><code class="javascript language-javascript">colorMode(HSB, 360, 100, 100, 100);
+	</code></pre>
+		</section>
+		<section>
+			<h2 id="colorrulesets">Color Rulesets</h2>
+			<p>Using the color wheel we can create different color rulesets.</p>
+			<h3 id="monochromatic">Monochromatic</h3>
+			<p>
+				A monochromatic color ruleset is a set of colors that are different
+				shades of the same color.
+			</p>
+			<h4 id="saturation">Saturation</h4>
+			<figure class="sketches">
+				<img
+					src="https://assets.codepen.io/484641/monochromatic-color-saturation.png"
+					alt="monochromatic saturation"
+				/>
+				<figcaption>
+					<pre><code class="javascript language-javascript">function setup&lpar;&rpar; &lcub;
+		createCanvas&lpar;100, 100&rpar;&semi;
+		colorMode&lpar;HSB, 360, 100, 100, 100&rpar;&semi;
+		background&lpar;"white"&rpar;&semi;
+		const angle = 330&semi;
+		const numberOfColor = 5&semi;
+
+		let sat = 0&semi;
+		let brght = 90&semi;
+		let satStep = 100 / numberOfColor&semi;
+		let rectWidth = width / numberOfColor&semi;
+		let x = 0&semi;
+		const y = 0&semi;
+		fill&lpar;angle, sat, brght&rpar;&semi;
+		rect&lpar;x, y, rectWidth, height&rpar;&semi;
+
+		x = x &plus; rectWidth&semi;
+		sat = sat &plus; satStep&semi;
+
+		fill&lpar;angle, sat, brght&rpar;&semi;
+		rect&lpar;x, y, rectWidth, height&rpar;&semi;
+
+		x = x &plus; rectWidth&semi;
+		sat = sat &plus; satStep&semi;
+
+		fill&lpar;angle, sat, brght&rpar;&semi;
+		rect&lpar;x, y, rectWidth, height&rpar;&semi;
+
+		x = x &plus; rectWidth&semi;
+		sat = sat &plus; satStep&semi;
+
+		fill&lpar;angle, sat, brght&rpar;&semi;
+		rect&lpar;x, y, rectWidth, height&rpar;&semi;
+
+		x = x &plus; rectWidth&semi;
+		sat = sat &plus; satStep&semi;
+
+		fill&lpar;angle, sat, brght&rpar;&semi;
+		rect&lpar;x, y, rectWidth, height&rpar;&semi;
+		// loop loop loop loop me 😱&excl;
+	&rcub;
+
+	function draw&lpar;&rpar; &lcub;&rcub;</code></pre>
+				</figcaption>
+			</figure>
+
+			<h4 id="brightness">Brightness</h4>
+			<figure class="sketches">
+				<img
+					src="https://assets.codepen.io/484641/monochromatic-color-brightness.png"
+					alt="monochromatic brightness"
+				/>
+				<figcaption>
+					<pre><code class="javascript language-javascript">function setup&lpar;&rpar; &lcub;
+		createCanvas&lpar;100, 100&rpar;&semi;
+		colorMode&lpar;HSB, 360, 100, 100, 100&rpar;&semi;
+		background&lpar;"white"&rpar;&semi;
+		const angle = 330&semi;
+		const numberOfColor = 5&semi;
+
+		let sat = 50&semi;
+		let brght = 0&semi;
+		let brghtStep = 100 / numberOfColor&semi;
+		let rectWidth = width / numberOfColor&semi;
+		let x = 0&semi;
+		const y = 0&semi;
+		fill&lpar;angle, sat, brght&rpar;&semi;
+		rect&lpar;x, y, rectWidth, height&rpar;&semi;
+
+		x = x &plus; rectWidth&semi;
+		brght = brght &plus; brghtStep&semi;
+
+		fill&lpar;angle, sat, brght&rpar;&semi;
+		rect&lpar;x, y, rectWidth, height&rpar;&semi;
+
+		x = x &plus; rectWidth&semi;
+		brght = brght &plus; brghtStep&semi;
+
+		fill&lpar;angle, sat, brght&rpar;&semi;
+		rect&lpar;x, y, rectWidth, height&rpar;&semi;
+
+		x = x &plus; rectWidth&semi;
+		brght = brght &plus; brghtStep&semi;
+
+		fill&lpar;angle, sat, brght&rpar;&semi;
+		rect&lpar;x, y, rectWidth, height&rpar;&semi;
+
+		x = x &plus; rectWidth&semi;
+		brght = brght &plus; brghtStep&semi;
+
+		fill&lpar;angle, sat, brght&rpar;&semi;
+		rect&lpar;x, y, rectWidth, height&rpar;&semi;
+		// also pleeeeease loop me 😱
+	&rcub;
+
+	function draw&lpar;&rpar; &lcub;&rcub;</code></pre>
+				</figcaption>
+			</figure>
+			<h3 id="analogous">Analogous</h3>
+			<p>
+				An analogous color ruleset is a set of colors that are next to each
+				other on the color wheel. Here we do a step of 20 degrees.
+			</p>
+			<figure class="sketches">
+				<img
+					src="https://assets.codepen.io/484641/analogous-color.png"
+					alt="analogous color ruleset"
+				/>
+				<figcaption>
+					<pre><code class="javascript language-javascript">const numberOfRects = 5&semi;
+	function setup&lpar;&rpar; &lcub;
+		createCanvas&lpar;100, 100&rpar;&semi;
+		colorMode&lpar;HSB, 360, 100, 100, 100&rpar;&semi;
+		background&lpar;"grey"&rpar;&semi;
+		noStroke&lpar;&rpar;&semi;
+		let x = 0&semi;
+		let y = 0&semi;
+		const rectWidth = width / numberOfRects&semi;
+		const hueStep = 20&semi;
+
+		let h = 330&semi;
+		fill&lpar;h, 70, 100&rpar;&semi;
+		rect&lpar;x, y, rectWidth, height&rpar;&semi;
+
+		x &plus;= rectWidth&semi;
+		h &hyphen;= hueStep&semi;
+
+		fill&lpar;h, 70, 100&rpar;&semi;
+		rect&lpar;x, y, rectWidth, height&rpar;&semi;
+
+		x &plus;= rectWidth&semi;
+		h &hyphen;= hueStep&semi;
+
+		fill&lpar;h, 70, 100&rpar;&semi;
+		rect&lpar;x, y, rectWidth, height&rpar;&semi;
+
+		x &plus;= rectWidth&semi;
+		h &hyphen;= hueStep&semi;
+
+		fill&lpar;h, 70, 100&rpar;&semi;
+		rect&lpar;x, y, rectWidth, height&rpar;&semi;
+
+		x &plus;= rectWidth&semi;
+		h &hyphen;= hueStep&semi;
+
+		fill&lpar;h, 70, 100&rpar;&semi;
+		rect&lpar;x, y, rectWidth, height&rpar;&semi;
+		// this cries for a loop 😭
+	&rcub;
+	function draw&lpar;&rpar; &lcub;&rcub;</code></pre>
+				</figcaption>
+			</figure>
+			<h3 id="complementary">Complementary</h3>
+			<p>
+				A complementary color ruleset is a set of colors that are opposite each
+				other on the color wheel.
+			</p>
+			<figure class="sketches">
+				<img
+					src="https://assets.codepen.io/484641/complementary-color.png"
+					alt="complementary color ruleset"
+				/>
+				<figcaption>
+					<pre><code class="javascript language-javascript">function setup&lpar;&rpar; &lcub;
+		createCanvas&lpar;100, 100&rpar;&semi;
+		noStroke&lpar;&rpar;&semi;
+		colorMode&lpar;HSB, 360, 100, 100, 100&rpar;&semi;
+		let angle = 330&semi;
+		let x = 0&semi;
+		const y = 0&semi;
+
+		fill&lpar;angle, 70, 100&rpar;&semi;
+		rect&lpar;x, y, width / 2, height&rpar;&semi;
+
+		angle &plus;= 180&semi;
+		x &plus;= width / 2&semi;
+
+		fill&lpar;angle &percnt; 360, 70, 100&rpar;&semi;
+		rect&lpar;x, y, width / 2, height&rpar;&semi;
+	&rcub;
+
+	function draw&lpar;&rpar; &lcub;&rcub;
+	</code></pre>
+				</figcaption>
+			</figure>
+			<h3 id="triadic">Triadic</h3>
+			<p>
+				A triadic color ruleset is a set of colors that are three colors evenly
+				spaced on the color wheel. Here we do a step of 120 degrees.
+			</p>
+			<figure class="sketches">
+				<img
+					src="https://assets.codepen.io/484641/triadic-color.png"
+					alt="triadic color ruleset"
+				/>
+				<figcaption>
+					<pre><code class="javascript language-javascript">let angle = 330;
+	function setup&lpar;&rpar; &lcub;
+		createCanvas&lpar;100, 100&rpar;&semi;
+		colorMode&lpar;HSB, 360, 100, 100, 100&rpar;&semi;
+		noStroke&lpar;&rpar;&semi;
+		background&lpar;"white"&rpar;&semi;
+		let x = 0&semi;
+		let y = 0&semi;
+
+		const rectWidth = width / 3&semi;
+		fill&lpar;angle, 50, 70&rpar;&semi;
+		console.log&lpar;&lcub; angle &rcub;&rpar;&semi;
+		rect&lpar;x, y, rectWidth, height&rpar;&semi;
+
+		x &plus;= rectWidth&semi;
+		angle = angle &hyphen; 120&semi;
+		console.log&lpar;&lcub; angle &rcub;&rpar;&semi;
+
+		fill&lpar;angle, 50, 70&rpar;&semi;
+		rect&lpar;x, y, rectWidth, height&rpar;&semi;
+		x &plus;= rectWidth&semi;
+		angle = angle &hyphen; 120&semi;
+		console.log&lpar;&lcub; angle &rcub;&rpar;&semi;
+
+		fill&lpar;angle, 50, 70&rpar;&semi;
+		rect&lpar;x, y, rectWidth, height&rpar;&semi;
+		// this screams for a loop 🙀
+		// what happens below 0?
+	&rcub;
+	function draw&lpar;&rpar; &lcub;&rcub;
+	</code></pre>
+				</figcaption>
+			</figure>
+			<h4 id="splitcomplementary">Split Complementary</h4>
+			<p>(to be defined)</p>
+			<h3 id="tetradic">Tetradic</h3>
+			<p>
+				A tetradic color ruleset is a set of colors that are four colors evenly
+				spaced on the color wheel. Here we do a step of 90 degrees.
+			</p>
+			<figure class="sketches">
+				<img
+					src="https://assets.codepen.io/484641/tetradic-color.png"
+					alt="tetradic color ruleset"
+				/>
+				<figcaption>
+					<pre><code class="javascript language-javascript">function setup&lpar;&rpar; &lcub;
+		createCanvas&lpar;100, 100&rpar;&semi;
+		noStroke&lpar;&rpar;&semi;
+		colorMode&lpar;HSB, 360, 100, 100, 100&rpar;&semi;
+		let angle = 330&semi;
+		const numberOfColors = 4&semi;
+		const incr = 90&semi;
+
+		const rectWidth = width / &lpar;numberOfColors / 2&rpar;&semi;
+		const rectHeight = height / &lpar;numberOfColors / 2&rpar;&semi;
+
+		for &lpar;let x = 0&semi; x &amp;lt&semi; width&semi; x = x &plus; rectWidth&rpar; &lcub;
+		for &lpar;let y = 0&semi; y &amp;lt&semi; height&semi; y = y &plus; rectHeight&rpar; &lcub;
+		fill&lpar;angle &percnt; 360, 70, 100&rpar;&semi;
+		rect&lpar;x, y, rectWidth, height&rpar;&semi;
+		angle &plus;= incr&semi;
+		&rcub;
+		&rcub;
+		// finally a loop&excl;YAY&bsol;o/&excl;&excl;&excl;&excl;1&excl;
+	&rcub;
+
+	function draw&lpar;&rpar; &lcub;&rcub;
+	</code></pre>
+				</figcaption>
+			</figure>
+			<h4 id="doublecomplementary">Double Complementary</h4>
+			<p>(to be defined)</p>
+		</section>
+		<section>
+			<h2 id="tools">Tools</h2>
+			<h3 id="libraries">Libraries</h3>
+			<ul>
+				<li>
+					<a href="https://github.com/rvanwijnen/spectral.js">Spectral.js</a> is
+					a paint like color mixing library utilizing the Kubelka-Munk theory.
+				</li>
+				<li>
+					<a href="https://gka.github.io/chroma.js">chroma.js</a> is a small-ish
+					zero-dependency JavaScript library (13.5kB) for all kinds of color conversions
+					and color scales.
+				</li>
+			</ul>
+
+			<h3 id="macos">MacOS</h3>
+			<ul>
+				<li>
+					<a href="https://github.com/sindresorhus/System-Color-Picker"
+						>System Color Picker</a>
+				</li>
+				<li><a href="https://sipapp.io/">Sip</a></li>
+				<li><a href="https://github.com/superhighfives/pika">Pika</a></li>
+			</ul>
+
+			<h3 id="windows">Windows</h3>
+			<ul>
+				<li>
+					<a
+						href="https://learn.microsoft.com/en-us/windows/powertoys/color-picker#settings"
+						>PowerToys Color Picker</a>
+				</li>
+			</ul>
+
+			<h3 id="online">Online</h3>
+			<ul>
+				<li><a href="https://coolors.co/">Coolors</a></li>
+				<li><a href="https://www.fffuel.co/cccolor/">CCColor</a></li>
+				<li>
+					<a href="https://www.canva.com/colors/color-wheel/"
+						>Canva Color Wheel</a>
+				</li>
+				<li>
+					<a href="https://www.canva.com/colors/color-palette-generator/"
+						>Canva Color Palette Generator</a>
+				</li>
+				<li><a href="https://color.adobe.com/">Adobe Color</a></li>
+			</ul>
+		</section>
+	</article>
+</Layout>
+
+<style>
+	#sketch {
+		margin-bottom: var(--s2);
+	}
+
+	table {
+		border-collapse: collapse;
+	}
+
+	table th {
+		padding-left: var(--s1);
+		padding-right: var(--s1);
+		border: none;
+		border-right: 1px dashed black;
+		border-bottom: 1px dashed black;
+	}
+
+	table td {
+		padding-left: var(--s1);
+		padding-right: var(--s1);
+		border: none;
+		border-right: 1px dashed black;
+	}
+
+	table th:last-child,
+	table td:last-child {
+		border-right: none;
+	}
+
+	figure {
+		margin: 0;
+		display: flex;
+		flex-direction: column;
+		gap: var(--s1);
+	}
+	figure.sketches {
+		margin: 0;
+		display: flex;
+		flex-direction: row;
+		gap: var(--s1);
+		/* align-items: center; */
+	}
+
+	figure {
+		margin-bottom: var(--s1);
+	}
+
+	figure.sketches img {
+		width: 100px;
+		height: 100px;
+	}
+
+	figure img {
+		width: 100%;
+		height: auto;
+	}
+
+	figure figcaption pre {
+		min-height: 100px;
+		padding-top: 0;
+		padding-bottom: 0;
+	}
+</style>
