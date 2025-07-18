@@ -1,0 +1,258 @@
+---
+import Layout from '../../layouts/default.astro';
+import './style.css';
+import './assets/css/typographic-scale-grid.css';
+---
+
+<!-- <!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Typographic Scales :: incode.cc</title>
+  <meta name="description" content="A visual interactive tool to create typographic scales">
+  <meta name="author" content="Fabian 'ff6347' Morón Zirfas">
+  <meta name="keywords" content="typography, web design, css">
+  <meta name="robots" content="index, follow">
+  <meta name="revisit-after" content="7 days">
+  <link rel="shortcut icon" href="favicon.svg" type="image/svg+xml">
+
+
+  <meta property="og:title" content="Readability :: incode.cc">
+  <meta property="og:description" content="A visual interactive guide to readability on the web">
+  <!-- <meta property="og:image" content="https://readability.incode.cc/assets/images/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:url" content="https://typographic-scales.incode.cc/">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./assets/css/typographic-scale-grid.css">
+</head>
+
+<body>
+  -->
+<Layout
+  title="Typographic Scales :: incode.cc"
+  description="A visual interactive tool to create typographic scales"
+  keywords="typography, web design, css"
+  author="Fabian 'ff6347' Morón Zirfas"
+  useGlobalCss={true}
+>
+  <div class="layout">
+    <header id="intro">
+      <h1>Typographic Scales</h1>
+
+      <p>
+        <strong>tl;dr:</strong> What are typographic scales? A typographic scale
+        is a series of type sizes that work well together. They are based on a ratio,
+        in which we increase the size of the type by multiplying the base size by
+        the ratio. The default scaling applied to the headings in CSS is not based
+        on a continuous scale. As you can see in the graph in the tool section, there
+        is a dent produced by the <code>h3</code> font size. If you like to fix this
+        and call it a day:
+      </p>
+      <ul>
+        <li>Enable the custom scale ratio option</li>
+        <li>Set the custom scale ratio to <code>1.2599</code></li>
+        <li>Copy the generated code</li>
+      </ul>
+      <p>
+        Skip to the tool <a href="#tool">right here</a>.
+      </p>
+    </header>
+    <article>
+      <h2>The (Slightly) Longer Version</h2>
+      <p>
+        However, we want to dig a little deeper into the topic of scales and
+        explore their usage. This document is based on various resources from
+        the web, most notably on professional tools like <a
+          href="https://typescale.com/">typescale.com</a
+        >, <a href="https://www.modularscale.com/"
+          >https://www.modularscale.com/</a
+        > or <a href="https://type-scale.spencermortensen.com/"
+          >https://type-scale.spencermortensen.com/</a
+        >. I did not reverse engineer these tools but took some inspiration from
+        it. This document is for educational purposes only and not a replacement
+        for these tools.
+      </p>
+      <h2>So where do these scales come from?</h2>
+      <p>
+        The origin of these scales come from traditional typesetting in print
+        production. We might know these from applications like Adobe InDesign as
+        the defaults we can select. Below you see a table off a traditional
+        scale.
+      </p>
+      <div class="typographic-scale">
+        <div class="header">The Classic Typographic Scale</div>
+        <div class="content">
+          <div class="letters">
+            <span style="font-size:6pt">a</span>
+            <span style="font-size:7pt">a</span>
+            <span style="font-size:8pt">a</span>
+            <span style="font-size:9pt">a</span>
+            <span style="font-size:10pt">a</span>
+            <span style="font-size:11pt">a</span>
+            <span style="font-size:12pt">a</span>
+            <span style="font-size:14pt">a</span>
+            <span style="font-size:16pt">a</span>
+            <span style="font-size:18pt">a</span>
+            <span style="font-size:21pt">a</span>
+            <span style="font-size:24pt">a</span>
+            <span style="font-size:36pt">a</span>
+            <span style="font-size:48pt">a</span>
+            <span style="font-size:60pt">a</span>
+            <span style="font-size:72pt">a</span>
+          </div>
+          <div class="numbers">
+            <span>6</span>
+            <span>7</span>
+            <span>8</span>
+            <span>9</span>
+            <span>10</span>
+            <span>11</span>
+            <span>12</span>
+            <span>14</span>
+            <span>16</span>
+            <span>18</span>
+            <span>21</span>
+            <span>24</span>
+            <span>36</span>
+            <span>48</span>
+            <span>60</span>
+            <span>72</span>
+          </div>
+        </div>
+        <!-- <div class="scale-container">
+        <div class="scale-text plus-1">+1pt</div>
+        <div class="scale-text plus-2">+2pt</div>
+        <div class="scale-text plus-3">+3pt</div>
+        <div class="scale-text plus-12">+12pt</div>
+      </div> -->
+      </div>
+      <p>
+        The increase of these sizes is not a continuous function. As you can see
+        in this graph below, we first increase by +1, then by +2, then by +3,
+        and then by +12. Since we work in code and not in lead we don't have to
+        constrain us to these fixed point sizes. We can use floating point
+        values to describe the size of our headings.
+      </p>
+
+      <div id="traditional-scale-plot"></div>
+
+      <p>
+        As stated before a good layout is based on rhythm. A recurring pattern
+        that the reader can learn and use to navigate or document. These rhythms
+        can be created using a function. For example the golden ratio or a
+        musical scale. The golden ratio is a number that is approximately equal
+        to 1.618033988749895. It is a number that is found by dividing a line
+        into two parts so that the longer part divided by the smaller part is
+        also equal to the whole length divided by the longer part. This ratio is
+        often found in nature and is considered to be aesthetically pleasing. We
+        can use this ratio to create a scale. The musical scales we are using
+        are also common patterns used in music.
+
+        <ul>
+          <li>
+            Minor second (1.067): The smallest interval in Western music, also
+            known as a semitone.
+          </li>
+          <li>
+            Major second (1.125): A whole tone, the interval between two
+            adjacent notes in a major scale.
+          </li>
+          <li>
+            Minor third (1.200): A common interval in music, often associated
+            with a "sad" or "melancholic" sound.
+          </li>
+          <li>
+            Major third (1.250): Another common interval, often associated with
+            a "happy" or "bright" sound.
+          </li>
+          <li>
+            Perfect fourth (1.333): A fundamental interval in music, used in
+            many melodies and harmonies.
+          </li>
+          <li>
+            Augmented fourth (1.414): Also known as a tritone, this interval was
+            once called the "devil in music" due to its dissonant sound.
+          </li>
+          <li>
+            Perfect fifth (1.500): One of the most consonant intervals, forming
+            the basis of many chords.
+          </li>
+          <li>
+            Major sixth (1.732): A wider interval, often used in melodies for
+            its expansive sound.
+          </li>
+          <li>
+            Major seventh (2.000): A wide, tense interval that often resolves to
+            the octave in melodies.
+          </li>
+          <li>
+            Perfect octave (2.500): The interval between two notes with the same
+            name (e.g., C to C), where the higher note has double the frequency
+            of the lower note.
+          </li>
+        </ul>
+      </p>
+    </article>
+
+    <div id="tool">
+      <section id="chart">
+        <h2>The Tool</h2>
+        <div id="chart-container"></div>
+      </section>
+      <section id="input">
+        <div class="column">
+          <div class="input-row">
+            <label for="ratios">Scale ratio:</label>
+            <select name="ratios" id="ratios"></select>
+          </div>
+          <div class="input-row">
+            <label for="custom">Custom scale ratio:</label>
+            <input type="text" name="custom" id="custom" />
+          </div>
+          <div class="input-row">
+            <label for="basesize">Base size in pixels:</label>
+            <input type="text" name="basesize" id="basesize" />
+          </div>
+          <div class="row">
+            <div class="column">
+              <h2>Generated CSS</h2>
+              <pre><code id="target" /></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="output">
+        <div id="shadow-host"></div>
+      </section>
+      <section id="additional">
+        <p>Read also:</p>
+        <ul>
+          <li>
+            <a
+              href="https://medium.com/@tilougarou/the-typographic-scale-reworked-a1b441b2beb2"
+              >https://medium.com/@tilougarou/the-typographic-scale-reworked-a1b441b2beb2</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://markboulton.co.uk/journal/five-simple-steps-to-better-typography-part-4/"
+              >https://markboulton.co.uk/journal/five-simple-steps-to-better-typography-part-4/</a
+            >
+          </li>
+        </ul>
+      </section>
+    </div>
+  </div>
+  <footer>
+    <p>
+      Built with &#x2764; by <a href="https://incode.cc">incode.cc</a>
+    </p>
+  </footer>
+  <!-- <script src="lib/d3.js"></script> -->
+  <!-- <script src="lib/plot.umd.js"></script> -->
+  <script src="../../scripts/typographic-scales.ts"></script>
+</Layout>
