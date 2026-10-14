@@ -1,3 +1,10 @@
+## [1.4.1](https://github.com/ff6347/incode/compare/v1.4.0...v1.4.1) (2026-10-14)
+
+
+### Bug Fixes
+
+* serve CodePen images from local assets ([bfd51da](https://github.com/ff6347/incode/commit/bfd51da48192bcc86b0a3317fbeb4e84960acf91))
+
 # [1.4.0](https://github.com/ff6347/incode/compare/v1.3.0...v1.4.0) (2025-06-11)
 
 
